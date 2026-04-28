@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 915255510141313676}
   - component: {fileID: 371216539892632287}
   m_Layer: 0
-  m_Name: EndBlock
-  m_TagString: Path
+  m_Name: PathBlock
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
