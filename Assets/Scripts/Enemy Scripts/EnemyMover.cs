@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EnemyMover : MonoBehaviour
@@ -62,7 +63,7 @@ public class EnemyMover : MonoBehaviour
         if (pathParent == null)
         {
             Debug.LogError("No GameObject with tag 'Path' found!");
-            return new Transform[0];
+            return Array.Empty<Transform>();
         }
 
         Transform[] children = new Transform[pathParent.transform.childCount];
@@ -103,7 +104,7 @@ public class EnemyMover : MonoBehaviour
 
     void ReachEnd()
     {
-        GameManager gameManager = FindObjectOfType<GameManager>();
+        GameManager gameManager = FindAnyObjectByType<GameManager>();
         if (gameManager)
         {
             gameManager.DealDamage(damage);
