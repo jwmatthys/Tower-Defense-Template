@@ -2793,6 +2793,10 @@ PrefabInstance:
       value: EndBlock
       objectReference: {fileID: 0}
     - target: {fileID: 6668197284450805215, guid: 038929b45d3bd4acfade1d9901eebb2b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6668197284450805215, guid: 038929b45d3bd4acfade1d9901eebb2b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.5
       objectReference: {fileID: 0}
@@ -3687,6 +3691,7 @@ GameObject:
   - component: {fileID: 1569283430}
   - component: {fileID: 1569283431}
   - component: {fileID: 1569283432}
+  - component: {fileID: 1569283433}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -3754,6 +3759,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
   pollInterval: 1
+--- !u!114 &1569283433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569283427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48bb6b64df7944fc0928497b20fbe37c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Singleton
 --- !u!1001 &1593549743
 PrefabInstance:
   m_ObjectHideFlags: 0
