@@ -61,6 +61,10 @@ PrefabInstance:
       value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 3673406227355697940, guid: 8b3049f1c901b4717bf28343476e0fa6, type: 3}
+      propertyPath: speed
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3673406227355697940, guid: 8b3049f1c901b4717bf28343476e0fa6, type: 3}
       propertyPath: damage
       value: 3
       objectReference: {fileID: 0}
@@ -93,7 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bdc1f1865082092985ec58db8e565bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyFreezer
-  damage: 0.1
   fireRate: 15
   attackRadius: 3
   freezeDuration: 5
