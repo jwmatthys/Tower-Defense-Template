@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public float HP = 100f;
-    
+    public float HP { get; private set; } = 100f;
 
     public void DealDamage(float damage)
     {
@@ -15,4 +14,6 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("EndLevel");
     }
+    
+    
 }

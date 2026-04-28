@@ -4,7 +4,7 @@ public class EnemyMover : MonoBehaviour
 {
     public float speed = 1f;
     public float damage = 1f;
-    [SerializeField] private float yPos = 0.75f;
+    [SerializeField] private float yPos = 0.5f;
 
     private Transform[] _waypoints;
     private int _currentWaypointIndex;
