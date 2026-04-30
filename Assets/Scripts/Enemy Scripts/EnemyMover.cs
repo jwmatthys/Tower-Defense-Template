@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class EnemyMover : MonoBehaviour
@@ -9,7 +10,20 @@ public class EnemyMover : MonoBehaviour
 
     private Transform[] _waypoints;
     private int _currentWaypointIndex;
+    private float _slowFactor = 1;
 
+    public void ApplySlowness(float factor, float duration)
+    {
+        StartCoroutine(Slow(factor, duration));
+    }
+
+    private IEnumerator Slow(float factor, float duration)
+    {
+        _slowFactor = factor;
+        yield return new WaitForSeconds(duration);
+        _slowFactor = 1;
+    }
+    
     public float PathProgress
     {
         get
@@ -88,7 +102,7 @@ public class EnemyMover : MonoBehaviour
         transform.position = Vector3.MoveTowards(
             transform.position,
             targetPos,
-            speed * Time.deltaTime
+            (speed * Time.deltaTime  / _slowFactor)
         );
 
         if (transform.position == targetPos)

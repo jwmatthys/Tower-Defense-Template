@@ -4353,6 +4353,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1881638355}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1862445900 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2364605008431984011, guid: 466e64936984582c49b81934815605f9, type: 3}
+  m_PrefabInstance: {fileID: 6364571416523598523}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1862445901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862445900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee7d0adba69b04f28806d3c28dd6d826, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TowerSlowAttack
+  slowInterval: 15
+  slowDuration: 5
+  slowFactor: 2
+  attackRadius: 3
 --- !u!1001 &1875516875
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4799,6 +4820,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Area Attack Tower
       objectReference: {fileID: 0}
+    - target: {fileID: 7128121266419329029, guid: 4d106731b83fb438d8095bbbd9419963, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5015,6 +5040,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e391d089486b402dae7d45cf3f7567c, type: 3}
+--- !u!1001 &6364571416523598523
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2364605008431984011, guid: 466e64936984582c49b81934815605f9, type: 3}
+      propertyPath: m_Name
+      value: Slow Tower
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173159304570695012, guid: 466e64936984582c49b81934815605f9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173159304570695012, guid: 466e64936984582c49b81934815605f9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173159304570695012, guid: 466e64936984582c49b81934815605f9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173159304570695012, guid: 466e64936984582c49b81934815605f9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173159304570695012, guid: 466e64936984582c49b81934815605f9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173159304570695012, guid: 466e64936984582c49b81934815605f9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173159304570695012, guid: 466e64936984582c49b81934815605f9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173159304570695012, guid: 466e64936984582c49b81934815605f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173159304570695012, guid: 466e64936984582c49b81934815605f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173159304570695012, guid: 466e64936984582c49b81934815605f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2143220128948046777, guid: 466e64936984582c49b81934815605f9, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2364605008431984011, guid: 466e64936984582c49b81934815605f9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1862445901}
+  m_SourcePrefab: {fileID: 100100000, guid: 466e64936984582c49b81934815605f9, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -5028,5 +5114,6 @@ SceneRoots:
   - {fileID: 5502088295755950672}
   - {fileID: 951663052}
   - {fileID: 1505571488}
+  - {fileID: 6364571416523598523}
   - {fileID: 5625575050929738923}
   - {fileID: 1367040152800143522}

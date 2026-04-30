@@ -144,3 +144,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   HP: 5
+  reward: 25
