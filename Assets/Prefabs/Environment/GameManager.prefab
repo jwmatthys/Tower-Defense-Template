@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8574978208903626963}
   - component: {fileID: 5316583870351563510}
   - component: {fileID: 7358116651299446804}
-  - component: {fileID: 842773970927611420}
+  - component: {fileID: 2885948199402772170}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48bb6b64df7944fc0928497b20fbe37c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Singleton
---- !u!114 &842773970927611420
+--- !u!114 &2885948199402772170
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,10 +101,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1295721487506528310}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f25d70879a7f48ce9794d4fb77d3f1e, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bd76800eba39cb7380e3e9b75e2b5e4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GridSelector
+  m_EditorClassIdentifier: Assembly-CSharp::TowerPlacer
   tileLayerMask:
     serializedVersion: 2
-    m_Bits: 128
-  rayDistance: 30
+    m_Bits: 4294967295
+  rayDistance: 100
+  shopUI: {fileID: 0}
