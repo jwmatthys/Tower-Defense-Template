@@ -16,7 +16,7 @@ MonoBehaviour:
   description: A basic tower.
   icon: {fileID: 0}
   prefab: {fileID: 1170612411488841515, guid: a4787c2032c094840ac3071fb9a494ec, type: 3}
-  buyCost: 100
-  upgradeCost: 150
-  sellValue: 50
+  buyCost: 50
+  upgradeCost: 100
+  sellValue: 25
   yOffset: 1

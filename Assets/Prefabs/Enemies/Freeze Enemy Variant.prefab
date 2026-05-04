@@ -71,7 +71,7 @@ PrefabInstance:
     - target: {fileID: 7404575003415190886, guid: 8b3049f1c901b4717bf28343476e0fa6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 5a7ca585a9b2b3c4587125916713263d, type: 2}
+      objectReference: {fileID: 2100000, guid: 0367a7c51e6b29e759738711dac28200, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -97,6 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bdc1f1865082092985ec58db8e565bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyFreezer
-  fireRate: 15
-  attackRadius: 3
+  freezeInterval: 15
+  freezeRadius: 3
   freezeDuration: 5

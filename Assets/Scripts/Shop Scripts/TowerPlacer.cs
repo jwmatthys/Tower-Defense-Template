@@ -29,6 +29,10 @@ public class TowerPlacer : GridSelector
     [Tooltip("Assign the TowerShopUI component in the scene.")]
     [SerializeField] private TowerShopUI shopUI;
 
+    [Tooltip("Only these layers are considered when clicking on a placed tower. " +
+             "Exclude the Enemy layer so enemies don't block tower selection.")]
+    [SerializeField] private LayerMask towerLayerMask = ~0;
+
     // -----------------------------------------------------------------------
     // Runtime state
     // -----------------------------------------------------------------------
@@ -45,6 +49,12 @@ public class TowerPlacer : GridSelector
 
     protected override void HandleClick()
     {
+        // Don't process world clicks when the pointer is over a UI element
+        // (e.g. the Sell / Upgrade / Cancel buttons).
+        if (UnityEngine.EventSystems.EventSystem.current != null &&
+            UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+            return;
+
         PlacedTower tower = RaycastToPlacedTower();
         if (tower != null)
         {
@@ -63,7 +73,7 @@ public class TowerPlacer : GridSelector
         if (!cam) return null;
 
         Ray ray = cam.ScreenPointToRay(UnityEngine.Input.mousePosition);
-        if (UnityEngine.Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
+        if (UnityEngine.Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, towerLayerMask))
             return hit.collider.GetComponentInParent<PlacedTower>()
                 ?? hit.collider.GetComponent<PlacedTower>();
 
@@ -119,6 +129,16 @@ public class TowerPlacer : GridSelector
     /// </summary>
     public void RequestPlace(TowerData data)
     {
+        // If an available tile is already selected, place immediately.
+        if (SelectedTile != null && SelectedTile.CompareTag(TAG_AVAILABLE))
+        {
+            PlaceTower(SelectedTile, data);
+            ClearSelection();
+            shopUI?.ShowIdle();
+            return;
+        }
+
+        // Otherwise queue the tower and wait for the player to click a tile.
         _pendingTower = data;
         shopUI?.ShowPendingPlacement(data);
         Debug.Log($"[TowerPlacer] Queued placement: {data.towerName}");
