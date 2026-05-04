@@ -8,7 +8,8 @@ using UnityEngine;
 /// --------
 /// 1. Player clicks a tile → OnTileSelected fires.
 /// 2. If the tile is Available and a tower type is pending → place the tower.
-/// 3. If the tile is Occupied → show the sell / upgrade panel for that tower.
+/// 3. If the tile is Occupied, OR the player clicks directly on a tower mesh
+///    → show the sell / upgrade panel for that tower.
 /// 4. TowerShopUI calls RequestPlace / RequestSell / RequestUpgrade on this component.
 /// </summary>
 public class TowerPlacer : GridSelector
@@ -39,6 +40,43 @@ public class TowerPlacer : GridSelector
     private PlacedTower _selectedPlacedTower;
 
     // -----------------------------------------------------------------------
+    // HandleClick override — intercept clicks on tower meshes
+    // -----------------------------------------------------------------------
+
+    protected override void HandleClick()
+    {
+        PlacedTower tower = RaycastToPlacedTower();
+        if (tower != null)
+        {
+            // Clicked directly on a tower mesh — select it without going through tile logic
+            SelectPlacedTower(tower);
+            return;
+        }
+
+        // No tower hit — let GridSelector handle tile selection normally
+        base.HandleClick();
+    }
+
+    private PlacedTower RaycastToPlacedTower()
+    {
+        Camera cam = Camera.main;
+        if (!cam) return null;
+
+        Ray ray = cam.ScreenPointToRay(UnityEngine.Input.mousePosition);
+        if (UnityEngine.Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
+            return hit.collider.GetComponentInParent<PlacedTower>()
+                ?? hit.collider.GetComponent<PlacedTower>();
+
+        return null;
+    }
+
+    private void SelectPlacedTower(PlacedTower tower)
+    {
+        _selectedPlacedTower = tower;
+        shopUI?.ShowOccupied(tower);
+    }
+
+    // -----------------------------------------------------------------------
     // GridSelector override
     // -----------------------------------------------------------------------
 
@@ -56,17 +94,17 @@ public class TowerPlacer : GridSelector
         {
             PlaceTower(tile, _pendingTower);
             _pendingTower = null;
+            ClearSelection(); // deselect the tile so it doesn't stay highlighted
             shopUI?.ShowIdle();
         }
         else if (tile.CompareTag(TAG_OCCUPIED))
         {
-            // Find the tower on this tile
             _selectedPlacedTower = FindTowerOnTile(tile);
             shopUI?.ShowOccupied(_selectedPlacedTower);
         }
         else
         {
-            // Available tile but no tower selected, or untagged tile
+            // Available tile but no tower pending, or untagged tile
             shopUI?.ShowIdle();
         }
     }
@@ -87,8 +125,7 @@ public class TowerPlacer : GridSelector
     }
 
     /// <summary>
-    /// Sell the tower on the currently selected occupied tile. Placeholder:
-    /// logs the action and destroys the tower object.
+    /// Sell the tower on the currently selected occupied tile.
     /// </summary>
     public void RequestSell()
     {
@@ -114,8 +151,7 @@ public class TowerPlacer : GridSelector
     }
 
     /// <summary>
-    /// Upgrade the tower on the currently selected occupied tile.
-    /// Placeholder — logs the action.
+    /// Upgrade the tower on the currently selected occupied tile. Placeholder.
     /// </summary>
     public void RequestUpgrade()
     {
@@ -132,7 +168,7 @@ public class TowerPlacer : GridSelector
         // TODO: implement upgrade logic (swap prefab, boost stats, etc.)
     }
 
-    /// <summary>Cancel a pending placement (e.g. player pressed Escape).</summary>
+    /// <summary>Cancel a pending placement.</summary>
     public void CancelPending()
     {
         _pendingTower = null;
@@ -167,7 +203,6 @@ public class TowerPlacer : GridSelector
 
     private static PlacedTower FindTowerOnTile(GridTile tile)
     {
-        // Search all placed towers for one that references this tile.
         foreach (PlacedTower t in FindObjectsByType<PlacedTower>(FindObjectsSortMode.None))
         {
             if (t.OccupiedTile == tile)

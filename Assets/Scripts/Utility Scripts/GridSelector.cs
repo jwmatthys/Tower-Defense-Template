@@ -31,12 +31,14 @@ public class GridSelector : MonoBehaviour
             Debug.LogError("GridSelector: No camera tagged 'MainCamera' found in scene.");
     }
 
+    // Update stays private so Unity's reflection finds exactly one copy.
+    // Subclasses that need to intercept clicks should override HandleClick().
     void Update()
     {
         HandleHover();
 
-        if (Input.GetMouseButtonDown(0)) // left-click
-            HandleSelection();
+        if (Input.GetMouseButtonDown(0))
+            HandleClick();
     }
 
     // -----------------------------------------------------------------------
@@ -50,17 +52,26 @@ public class GridSelector : MonoBehaviour
         if (tile == _hoveredTile)
             return; // nothing changed
 
-        // Leave the old tile
         _hoveredTile?.OnHoverExit();
-
-        // Enter the new tile (may be null if mouse is off the grid)
         _hoveredTile = tile;
-
         _hoveredTile?.OnHoverEnter();
     }
 
     // -----------------------------------------------------------------------
-    // Selection — runs on click
+    // Click — override in subclasses to intercept before tile selection
+    // -----------------------------------------------------------------------
+
+    /// <summary>
+    /// Called on left-click. Override in a subclass to intercept clicks before
+    /// tile selection runs. Call base.HandleClick() to keep tile selection working.
+    /// </summary>
+    protected virtual void HandleClick()
+    {
+        HandleSelection();
+    }
+
+    // -----------------------------------------------------------------------
+    // Selection
     // -----------------------------------------------------------------------
 
     private void HandleSelection()
@@ -69,23 +80,19 @@ public class GridSelector : MonoBehaviour
 
         if (!tile)
         {
-            // Clicked empty space — deselect whatever is selected
-            _selectedTile?.Deselect();
-            _selectedTile = null;
+            ClearSelection();
+            OnTileSelected(null);
             return;
         }
 
         if (tile == _selectedTile)
         {
-            // Clicking the already-selected tile toggles it off
             tile.ToggleSelected();
             _selectedTile = null;
         }
         else
         {
-            // Deselect the previous tile, select the new one
             _selectedTile?.Deselect();
-
             tile.ToggleSelected();
             _selectedTile = tile;
         }
@@ -111,7 +118,7 @@ public class GridSelector : MonoBehaviour
     }
 
     // -----------------------------------------------------------------------
-    // Extension point
+    // Extension points
     // -----------------------------------------------------------------------
 
     /// <summary>
@@ -126,6 +133,17 @@ public class GridSelector : MonoBehaviour
         Debug.Log(tile
             ? $"Selected tile: {tile.gameObject.name} at {tile.transform.position}"
             : "Selection cleared.");
+    }
+
+    /// <summary>
+    /// Programmatically deselects the currently selected tile and clears internal
+    /// state. Call from subclasses when a selection should be cleared without a
+    /// click (e.g. immediately after placing a tower).
+    /// </summary>
+    protected void ClearSelection()
+    {
+        _selectedTile?.Deselect();
+        _selectedTile = null;
     }
 
     /// <summary>

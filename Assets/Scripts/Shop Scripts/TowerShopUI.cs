@@ -96,6 +96,7 @@ public class TowerShopUI : MonoBehaviour
     /// <summary>An occupied tile is selected; show sell / upgrade options for its tower.</summary>
     public void ShowOccupied(PlacedTower tower)
     {
+        Debug.Log($"[TowerShopUI] ShowOccupied called, tower={tower}");
         cancelButton.gameObject.SetActive(false);
 
         if (tower == null)
