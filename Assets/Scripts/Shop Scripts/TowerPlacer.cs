@@ -33,10 +33,6 @@ public class TowerPlacer : GridSelector
              "Exclude the Enemy layer so enemies don't block tower selection.")]
     [SerializeField] private LayerMask towerLayerMask = ~0;
 
-    [Tooltip("The GameManager manages the economy.")]
-    [SerializeField] private GameManager gameManager;
-
-    
     // -----------------------------------------------------------------------
     // Runtime state
     // -----------------------------------------------------------------------
@@ -47,6 +43,9 @@ public class TowerPlacer : GridSelector
     /// <summary>The tower sitting on the currently selected occupied tile.</summary>
     private PlacedTower _selectedPlacedTower;
 
+    /// <summary> The gameManager is in charge of the economy. </summary>
+    [SerializeField] private EconomyManager economyManager;
+    
 
     // -----------------------------------------------------------------------
     // HandleClick override — intercept clicks on tower meshes
@@ -165,7 +164,7 @@ public class TowerPlacer : GridSelector
 
         Debug.Log($"[TowerPlacer] Sold {_selectedPlacedTower.Data.towerName} for {refund} gold.");
 
-        gameManager.GainMoney(refund);
+        economyManager.GainMoney(refund);
         
         Destroy(_selectedPlacedTower.gameObject);
 
@@ -213,13 +212,13 @@ public class TowerPlacer : GridSelector
             return;
         }
 
-        if (data.buyCost > gameManager.money)
+        if (data.buyCost > economyManager.money)
         {
             Debug.LogWarning($"[TowerPlacer] TowerData '{data.towerName}' cost exceeds available money.");
             return;
         }
         
-        gameManager.SpendMoney(data.buyCost);
+        economyManager.SpendMoney(data.buyCost);
         Vector3 spawnPos = tile.transform.position + Vector3.up * data.yOffset;
         GameObject go    = Instantiate(data.prefab, spawnPos, Quaternion.identity);
 

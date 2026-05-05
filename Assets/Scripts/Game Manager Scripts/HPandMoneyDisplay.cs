@@ -6,16 +6,16 @@ public class HPandMoneyDisplay : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI hpText;
     [SerializeField] private TextMeshProUGUI moneyText;
-    private GameManager _gameManager;
+    private EconomyManager _economyManager;
 
     private void Start()
     {
-        _gameManager = FindAnyObjectByType<GameManager>();
+        _economyManager = FindAnyObjectByType<EconomyManager>();
     }
 
     void Update()
     {
-        hpText.text = $"HP: {_gameManager.HP:0}";
-        moneyText.text = $"${_gameManager.money:0}";
+        hpText.text = $"HP: {_economyManager.HP:0}";
+        moneyText.text = $"${_economyManager.money:0}";
     }
 }

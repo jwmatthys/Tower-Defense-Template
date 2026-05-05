@@ -10,7 +10,7 @@ public class EnemyHealth : MonoBehaviour
         HP -= amount;
         if (HP <= 0f)
         {
-            FindAnyObjectByType<GameManager>().GainMoney(reward);
+            FindAnyObjectByType<EconomyManager>().GainMoney(reward);
             Destroy(gameObject);
         }
     }

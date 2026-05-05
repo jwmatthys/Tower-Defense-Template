@@ -118,7 +118,7 @@ public class EnemyMover : MonoBehaviour
 
     void ReachEnd()
     {
-        GameManager gameManager = FindAnyObjectByType<GameManager>();
+        EconomyManager gameManager = FindAnyObjectByType<EconomyManager>();
         if (gameManager)
         {
             gameManager.DealDamage(damage);

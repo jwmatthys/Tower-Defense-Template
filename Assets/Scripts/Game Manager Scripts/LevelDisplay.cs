@@ -5,7 +5,7 @@ using UnityEngine;
 public class LevelDisplay : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI levelText;
-    [SerializeField] private float levelDisplayTime = 3f;
+    [SerializeField] private float levelDisplayTime = 4f;
     void Start()
     {
         StartCoroutine(LevelDisplayCoroutine());

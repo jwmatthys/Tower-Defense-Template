@@ -1,6 +1,9 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class EconomyManager : MonoBehaviour
 {
     public float HP { get; private set; } = 100f;
     public int money { get; private set; } = 100;
@@ -20,10 +23,7 @@ public class GameManager : MonoBehaviour
         money += amount;
     }
 
-    public void EndLevel()
-    {
-        Debug.Log("EndLevel");
-    }
+
     
     
 }
