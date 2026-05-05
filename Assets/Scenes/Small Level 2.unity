@@ -4432,10 +4432,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1190728936689263405, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 1690525221840475969, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4532,14 +4528,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2157895546093895868, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2606933793921731633, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3658002038239030584, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -4623,18 +4611,6 @@ PrefabInstance:
       propertyPath: shopUI
       value: 
       objectReference: {fileID: 5502088295755950675}
-    - target: {fileID: 4711131459076724107, guid: 1e391d089486b402dae7d45cf3f7567c, type: 3}
-      propertyPath: economyManager
-      value: 
-      objectReference: {fileID: 5829044068815403885}
-    - target: {fileID: 4711131459076724107, guid: 1e391d089486b402dae7d45cf3f7567c, type: 3}
-      propertyPath: tileLayerMask.m_Bits
-      value: 128
-      objectReference: {fileID: 0}
-    - target: {fileID: 4711131459076724107, guid: 1e391d089486b402dae7d45cf3f7567c, type: 3}
-      propertyPath: towerLayerMask.m_Bits
-      value: 384
-      objectReference: {fileID: 0}
     - target: {fileID: 7091430710089461852, guid: 1e391d089486b402dae7d45cf3f7567c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4926,10 +4902,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7657606540852469868, guid: 0ee90bbaf07cc8577a9a5f008b7c2e45, type: 3}
-      propertyPath: m_PlayableAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: aff593c8e51b45f2b9b84659b76ad8b3, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

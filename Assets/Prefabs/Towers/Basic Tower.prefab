@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2336275966479710071}
   - component: {fileID: 5409333875282112141}
   - component: {fileID: 4485806926785203642}
+  - component: {fileID: -6861502671816601745}
   m_Layer: 8
   m_Name: Basic Tower
   m_TagString: Untagged
@@ -173,3 +174,18 @@ MonoBehaviour:
   damage: 1
   attackInterval: 1
   attackRadius: 2
+--- !u!114 &-6861502671816601745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170612411488841515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d17ae9c81716783f7ac66ac5e2a7abe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ColorPulse
+  pulseColor: {r: 1, g: 1, b: 1, a: 1}
+  duration: 0.4
+  attackRatio: 0.3

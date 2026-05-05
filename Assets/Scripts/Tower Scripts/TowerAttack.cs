@@ -1,4 +1,6 @@
 // TowerAttack.cs
+
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -14,6 +16,13 @@ public class TowerAttack : MonoBehaviour
 
     private Coroutine _shootingCoroutine;
     private readonly Collider[] _hits = new Collider[100];
+
+    private ColorPulse _colorPulse;
+
+    private void Awake()
+    {
+        _colorPulse = GetComponent<ColorPulse>();
+    }
 
     private void Update()
     {
@@ -32,6 +41,7 @@ public class TowerAttack : MonoBehaviour
     {
         while (true)
         {
+            _colorPulse.Pulse();
             if (attackPattern == AttackPattern.Area)
                 DealDamageToAll();
             else

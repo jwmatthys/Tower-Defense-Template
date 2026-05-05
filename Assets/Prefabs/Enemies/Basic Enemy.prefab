@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 3620495631709199701}
   - component: {fileID: 3673406227355697940}
   - component: {fileID: 803854880165529414}
+  - component: {fileID: -5620146733222492800}
+  - component: {fileID: -6030140485795090030}
   m_Layer: 6
   m_Name: Basic Enemy
   m_TagString: Enemy
@@ -145,3 +147,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   HP: 5
   reward: 25
+--- !u!114 &-5620146733222492800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878481312096916973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d17ae9c81716783f7ac66ac5e2a7abe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ColorPulse
+  pulseColor: {r: 1, g: 0, b: 0, a: 1}
+  duration: 0.4
+  attackRatio: 0.3
+--- !u!114 &-6030140485795090030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878481312096916973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e918924e1dd823675b2279bd5a27f473, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealthBar
+  offset: {x: 0, y: 1.2, z: 0}
+  width: 1
+  height: 0.2
+  barMaterial: {fileID: 2100000, guid: 9124d2cbce9a3102c887f7cee390e195, type: 2}
+  fillColor: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 1}
+  backgroundColor: {r: 0.15, g: 0.15, b: 0.15, a: 1}
+  borderThickness: 0.01
+  hideWhenFull: 1

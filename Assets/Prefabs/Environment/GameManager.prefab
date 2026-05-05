@@ -63,10 +63,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerPlacer
   tileLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 128
   rayDistance: 100
   shopUI: {fileID: 0}
   towerLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
-  economyManager: {fileID: 0}
+    m_Bits: 384
