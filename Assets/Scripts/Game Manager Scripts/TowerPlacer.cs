@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -44,12 +45,17 @@ public class TowerPlacer : GridSelector
     private PlacedTower _selectedPlacedTower;
 
     /// <summary> The gameManager is in charge of the economy. </summary>
-    [SerializeField] private EconomyManager economyManager;
+    private EconomyManager _economyManager;
     
 
     // -----------------------------------------------------------------------
     // HandleClick override — intercept clicks on tower meshes
     // -----------------------------------------------------------------------
+
+    private void Awake()
+    {
+        _economyManager = EconomyManager.Instance ?? FindAnyObjectByType<EconomyManager>();
+    }
 
     protected override void HandleClick()
     {
@@ -76,8 +82,8 @@ public class TowerPlacer : GridSelector
         Camera cam = Camera.main;
         if (!cam) return null;
 
-        Ray ray = cam.ScreenPointToRay(UnityEngine.Input.mousePosition);
-        if (UnityEngine.Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, towerLayerMask))
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, towerLayerMask))
             return hit.collider.GetComponentInParent<PlacedTower>()
                 ?? hit.collider.GetComponent<PlacedTower>();
 
@@ -164,7 +170,7 @@ public class TowerPlacer : GridSelector
 
         Debug.Log($"[TowerPlacer] Sold {_selectedPlacedTower.Data.towerName} for {refund} gold.");
 
-        economyManager.GainMoney(refund);
+        _economyManager.GainMoney(refund);
         
         Destroy(_selectedPlacedTower.gameObject);
 
@@ -206,19 +212,22 @@ public class TowerPlacer : GridSelector
 
     private void PlaceTower(GridTile tile, TowerData data)
     {
+        
+        Debug.Log($"Available money: {_economyManager.Money}");
+        
         if (data.prefab == null)
         {
             Debug.LogError($"[TowerPlacer] TowerData '{data.towerName}' has no prefab assigned.");
             return;
         }
 
-        if (data.buyCost > economyManager.money)
+        if (data.buyCost > _economyManager.Money)
         {
             Debug.LogWarning($"[TowerPlacer] TowerData '{data.towerName}' cost exceeds available money.");
             return;
         }
         
-        economyManager.SpendMoney(data.buyCost);
+        _economyManager.SpendMoney(data.buyCost);
         Vector3 spawnPos = tile.transform.position + Vector3.up * data.yOffset;
         GameObject go    = Instantiate(data.prefab, spawnPos, Quaternion.identity);
 
@@ -235,7 +244,7 @@ public class TowerPlacer : GridSelector
 
     private static PlacedTower FindTowerOnTile(GridTile tile)
     {
-        foreach (PlacedTower t in FindObjectsByType<PlacedTower>(FindObjectsSortMode.None))
+        foreach (PlacedTower t in FindObjectsByType<PlacedTower>())
         {
             if (t.OccupiedTile == tile)
                 return t;

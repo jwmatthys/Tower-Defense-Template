@@ -4,19 +4,21 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using System.Collections;
 
-public class LevelManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     [Tooltip("How many seconds to wait after ending the level" +
              "before loading the next scene.")]
     [SerializeField] private float endLevelDelay = 3f;
 
+    [Tooltip("The EconomyManager keeps track of HP, money, and current level.")]
+    [SerializeField] private EconomyManager economyManager;
+
     [SerializeField] private TextMeshProUGUI sceneClearedMessage;
-    
     [SerializeField] private PlayableDirector director;
-    public float pollInterval = 1f;
 
+    private readonly float _pollInterval = 1f;
     private int _enemyLayer;
-
+    
     void Awake()
     {
         _enemyLayer = LayerMask.NameToLayer("Enemy");
@@ -34,7 +36,7 @@ public class LevelManager : MonoBehaviour
 
     void OnTimelineFinished(PlayableDirector d)
     {
-        InvokeRepeating(nameof(CheckLevelEnd), 0f, pollInterval);
+        InvokeRepeating(nameof(CheckLevelEnd), 0f, _pollInterval);
     }
 
     void CheckLevelEnd()
@@ -48,8 +50,8 @@ public class LevelManager : MonoBehaviour
     
     private void EndLevel()
     {
-        Debug.Log("EndLevel");
         sceneClearedMessage.gameObject.SetActive(true);
+        economyManager.NextLevel();
         StartCoroutine(LoadNextLevel());
     }
 

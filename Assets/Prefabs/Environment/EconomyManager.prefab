@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1295721487506528310
+--- !u!1 &3838462399498436805
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7091430710089461852}
-  - component: {fileID: 7541471852560107762}
-  - component: {fileID: 4711131459076724107}
+  - component: {fileID: 1847616802983707322}
+  - component: {fileID: 2475094627821120848}
+  - component: {fileID: 2118653501908728784}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: EconomyManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7091430710089461852
+--- !u!4 &1847616802983707322
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1295721487506528310}
+  m_GameObject: {fileID: 3838462399498436805}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -33,40 +33,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7541471852560107762
+--- !u!114 &2475094627821120848
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1295721487506528310}
+  m_GameObject: {fileID: 3838462399498436805}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8ba209ede5354951bad4ca8905cabe2, type: 3}
+  m_Script: {fileID: 11500000, guid: 213f0006ae731476a95fcef4fa3ed8ad, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LevelManager
-  endLevelDelay: 3
-  economyManager: {fileID: 0}
-  sceneClearedMessage: {fileID: 0}
-  director: {fileID: 0}
---- !u!114 &4711131459076724107
+  m_EditorClassIdentifier: Assembly-CSharp::EconomyManager
+  HP: 100
+  money: 100
+--- !u!114 &2118653501908728784
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1295721487506528310}
+  m_GameObject: {fileID: 3838462399498436805}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bd76800eba39cb7380e3e9b75e2b5e4, type: 3}
+  m_Script: {fileID: 11500000, guid: 48bb6b64df7944fc0928497b20fbe37c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TowerPlacer
-  tileLayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  rayDistance: 100
-  shopUI: {fileID: 0}
-  towerLayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  economyManager: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::Singleton

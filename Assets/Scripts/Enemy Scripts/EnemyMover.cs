@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyMover : MonoBehaviour
 {
     public float speed = 1f;
-    public float damage = 1f;
+    public int damage = 1;
     [SerializeField] private float yPos = 0.5f;
 
     private Transform[] _waypoints;

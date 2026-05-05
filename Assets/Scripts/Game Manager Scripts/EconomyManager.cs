@@ -1,29 +1,44 @@
-using System.Collections;
-using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class EconomyManager : MonoBehaviour
 {
-    public float HP { get; private set; } = 100f;
-    public int money { get; private set; } = 100;
+    public static EconomyManager Instance { get; private set; }
 
-    public void DealDamage(float damage)
+    public int HP { get; private set; } = 100;
+    public int Money { get; private set; } = 100;
+    public int Level { get; private set; } = 1;
+
+    public void GainMoney(int amount)
     {
-        HP -= damage;
+        Money += amount;
     }
 
     public void SpendMoney(int amount)
     {
-        money -= amount;
+        Money -= amount;
     }
 
-    public void GainMoney(int amount)
+    public void DealDamage(int damage)
     {
-        money += amount;
+        HP -= damage;
     }
 
+    public void NextLevel()
+    {
+        Level++;
+    }
+    
+    
+    
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject); // Kill the scene duplicate, keep the original
+            return;
+        }
 
-    
-    
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
 }
