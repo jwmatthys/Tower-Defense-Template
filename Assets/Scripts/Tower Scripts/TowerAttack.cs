@@ -1,18 +1,20 @@
 // TowerAttack.cs
-
-using System;
 using System.Collections;
 using UnityEngine;
 
 public class TowerAttack : MonoBehaviour
 {
-    public enum AttackPattern { AttackFirst, AttackLast, AttackClosest, Area }
+    public enum AttackPattern { AttackFirst, AttackLast, AttackClosest, Area, Slow }
 
     [Header("Settings")]
     public AttackPattern attackPattern = AttackPattern.AttackFirst;
     public float damage = 1f;
     public float attackInterval = 1f;
     public float attackRadius = 2f;
+
+    [Header("Slow Settings")]
+    public float slowFactor = 2f;
+    public float slowDuration = 5f;
 
     private Coroutine _shootingCoroutine;
     private readonly Collider[] _hits = new Collider[100];
@@ -42,10 +44,13 @@ public class TowerAttack : MonoBehaviour
         while (true)
         {
             _colorPulse.Pulse();
-            if (attackPattern == AttackPattern.Area)
-                DealDamageToAll();
-            else
-                GetTarget()?.TakeDamage(damage);
+
+            switch (attackPattern)
+            {
+                case AttackPattern.Area: DealDamageToAll(); break;
+                case AttackPattern.Slow: ApplySlowToAll(); break;
+                default: GetTarget()?.TakeDamage(damage); break;
+            }
 
             yield return new WaitForSeconds(attackInterval);
         }
@@ -56,6 +61,13 @@ public class TowerAttack : MonoBehaviour
         int count = Physics.OverlapSphereNonAlloc(transform.position, attackRadius, _hits, LayerMask.GetMask("Enemy"));
         for (int i = 0; i < count; i++)
             _hits[i].GetComponent<EnemyHealth>()?.TakeDamage(damage);
+    }
+
+    private void ApplySlowToAll()
+    {
+        int count = Physics.OverlapSphereNonAlloc(transform.position, attackRadius, _hits, LayerMask.GetMask("Enemy"));
+        for (int i = 0; i < count; i++)
+            _hits[i].GetComponent<EnemyMover>()?.ApplySlowness(slowFactor, slowDuration);
     }
 
     private EnemyHealth GetTarget()
@@ -70,7 +82,7 @@ public class TowerAttack : MonoBehaviour
         {
             EnemyHealth health = _hits[i].GetComponent<EnemyHealth>();
             EnemyMover mover = _hits[i].GetComponent<EnemyMover>();
-            if (health || mover) continue;
+            if (health == null || mover == null) continue;
 
             float score = attackPattern switch
             {

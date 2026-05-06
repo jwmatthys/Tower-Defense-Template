@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5409333875282112141}
   - component: {fileID: 4485806926785203642}
   - component: {fileID: -6861502671816601745}
+  - component: {fileID: 4131318485169075335}
   m_Layer: 8
   m_Name: Basic Tower
   m_TagString: Untagged
@@ -174,6 +175,8 @@ MonoBehaviour:
   damage: 1
   attackInterval: 1
   attackRadius: 2
+  slowFactor: 2
+  slowDuration: 5
 --- !u!114 &-6861502671816601745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,3 +192,18 @@ MonoBehaviour:
   pulseColor: {r: 1, g: 1, b: 1, a: 1}
   duration: 0.4
   attackRatio: 0.3
+--- !u!114 &4131318485169075335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170612411488841515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a5748ec7d50a264ab41333982b023e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  segments: 64
+  yOffset: -0.45
+  discMaterial: {fileID: 2100000, guid: 3f18a8e6fdbc2a2479042d2802ef6fce, type: 2}

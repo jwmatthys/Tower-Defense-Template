@@ -8,6 +8,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6861502671816601745, guid: a4787c2032c094840ac3071fb9a494ec, type: 3}
+      propertyPath: pulseColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6861502671816601745, guid: a4787c2032c094840ac3071fb9a494ec, type: 3}
+      propertyPath: pulseColor.g
+      value: 0.88088065
+      objectReference: {fileID: 0}
+    - target: {fileID: -6861502671816601745, guid: a4787c2032c094840ac3071fb9a494ec, type: 3}
+      propertyPath: pulseColor.r
+      value: 0.45148236
+      objectReference: {fileID: 0}
     - target: {fileID: 1170612411488841515, guid: a4787c2032c094840ac3071fb9a494ec, type: 3}
       propertyPath: m_Name
       value: Slow Tower Variant
@@ -16,6 +28,26 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: aec0a766498f50236995d096da6bb262, type: 2}
+    - target: {fileID: 4485806926785203642, guid: a4787c2032c094840ac3071fb9a494ec, type: 3}
+      propertyPath: damage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485806926785203642, guid: a4787c2032c094840ac3071fb9a494ec, type: 3}
+      propertyPath: slowFactor
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485806926785203642, guid: a4787c2032c094840ac3071fb9a494ec, type: 3}
+      propertyPath: attackRadius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485806926785203642, guid: a4787c2032c094840ac3071fb9a494ec, type: 3}
+      propertyPath: attackPattern
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485806926785203642, guid: a4787c2032c094840ac3071fb9a494ec, type: 3}
+      propertyPath: attackInterval
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6008422108269342660, guid: a4787c2032c094840ac3071fb9a494ec, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3
@@ -57,7 +89,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 4485806926785203642, guid: a4787c2032c094840ac3071fb9a494ec, type: 3}
+    - {fileID: 5409333875282112141, guid: a4787c2032c094840ac3071fb9a494ec, type: 3}
+    - {fileID: 3265150588818311449, guid: a4787c2032c094840ac3071fb9a494ec, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

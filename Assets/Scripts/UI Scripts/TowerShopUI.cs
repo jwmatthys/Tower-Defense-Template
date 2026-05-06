@@ -72,8 +72,12 @@ public class TowerShopUI : MonoBehaviour
     // -----------------------------------------------------------------------
 
     /// <summary>Default state: no tile selected, no pending action.</summary>
+    // Tracks the indicator on whichever tower is currently selected.
+    private RadiusIndicator _activeIndicator;
+
     public void ShowIdle()
     {
+        HideActiveIndicator();
         SetSellUpgradeVisible(false);
         cancelButton.gameObject.SetActive(false);
         towerInfoPanel.SetActive(false);
@@ -83,6 +87,7 @@ public class TowerShopUI : MonoBehaviour
     /// <summary>A tower type has been chosen; waiting for the player to click a tile.</summary>
     public void ShowPendingPlacement(TowerData data)
     {
+        HideActiveIndicator();
         SetSellUpgradeVisible(false);
         cancelButton.gameObject.SetActive(true);
         towerInfoPanel.SetActive(true);
@@ -96,7 +101,7 @@ public class TowerShopUI : MonoBehaviour
     /// <summary>An occupied tile is selected; show sell / upgrade options for its tower.</summary>
     public void ShowOccupied(PlacedTower tower)
     {
-        Debug.Log($"[TowerShopUI] ShowOccupied called, tower={tower}");
+        HideActiveIndicator();
         cancelButton.gameObject.SetActive(false);
 
         if (tower == null)
@@ -116,6 +121,19 @@ public class TowerShopUI : MonoBehaviour
         statusText.text    = $"{data.towerName} selected.";
 
         SetSellUpgradeVisible(true);
+
+        // Show the attack radius ring if the tower has a TowerAttack component.
+        TowerAttack attack = tower.GetComponent<TowerAttack>();
+        if (attack != null)
+        {
+            // Add RadiusIndicator at runtime if the prefab doesn't already have one.
+            RadiusIndicator indicator = tower.GetComponent<RadiusIndicator>();
+            if (indicator == null)
+                indicator = tower.gameObject.AddComponent<RadiusIndicator>();
+
+            indicator.Show(attack.attackRadius);
+            _activeIndicator = indicator;
+        }
     }
 
     // -----------------------------------------------------------------------
@@ -195,5 +213,11 @@ public class TowerShopUI : MonoBehaviour
     {
         sellButton.gameObject.SetActive(visible);
         upgradeButton.gameObject.SetActive(visible);
+    }
+
+    private void HideActiveIndicator()
+    {
+        _activeIndicator?.Hide();
+        _activeIndicator = null;
     }
 }
