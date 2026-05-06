@@ -940,7 +940,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6668197284450805215, guid: 8593e79cd94014191b37bc31821267d2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7
+      value: 6.98
       objectReference: {fileID: 0}
     - target: {fileID: 6668197284450805215, guid: 8593e79cd94014191b37bc31821267d2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2756,59 +2756,59 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 965142300}
-  - {fileID: 881591911}
-  - {fileID: 276452872}
-  - {fileID: 1129272778}
-  - {fileID: 1148595935}
-  - {fileID: 1194148338}
-  - {fileID: 1185862984}
-  - {fileID: 635576510}
-  - {fileID: 1229438358}
-  - {fileID: 1458081626}
-  - {fileID: 764940907}
-  - {fileID: 1875516876}
-  - {fileID: 1395116565}
-  - {fileID: 378463802}
-  - {fileID: 1756084138}
-  - {fileID: 1474330211}
-  - {fileID: 1808898422}
-  - {fileID: 1315854396}
-  - {fileID: 469219933}
-  - {fileID: 1295286074}
-  - {fileID: 572137692}
-  - {fileID: 1732718249}
-  - {fileID: 734369047}
-  - {fileID: 1423250936}
-  - {fileID: 953660459}
-  - {fileID: 575728715}
-  - {fileID: 1566269091}
-  - {fileID: 1720735655}
-  - {fileID: 380016401}
-  - {fileID: 1687723613}
-  - {fileID: 1292991828}
-  - {fileID: 1590714167}
-  - {fileID: 496099778}
-  - {fileID: 459774260}
-  - {fileID: 2028099914}
-  - {fileID: 1071778750}
-  - {fileID: 1923481975}
-  - {fileID: 2139902590}
-  - {fileID: 1384102548}
-  - {fileID: 1489432140}
-  - {fileID: 324637403}
-  - {fileID: 923738534}
-  - {fileID: 841874799}
-  - {fileID: 1030650487}
-  - {fileID: 966688589}
-  - {fileID: 1457719042}
-  - {fileID: 567156179}
-  - {fileID: 1145374241}
-  - {fileID: 1124490622}
-  - {fileID: 13116928}
   - {fileID: 1222066202}
+  - {fileID: 2028099914}
+  - {fileID: 1457719042}
+  - {fileID: 1292991828}
   - {fileID: 312883945}
+  - {fileID: 1071778750}
+  - {fileID: 567156179}
+  - {fileID: 1590714167}
+  - {fileID: 1423250936}
+  - {fileID: 764940907}
+  - {fileID: 572137692}
+  - {fileID: 1229438358}
+  - {fileID: 575728715}
+  - {fileID: 1395116565}
+  - {fileID: 734369047}
+  - {fileID: 1458081626}
+  - {fileID: 953660459}
+  - {fileID: 1875516876}
+  - {fileID: 1732718249}
+  - {fileID: 1315854396}
+  - {fileID: 1129272778}
+  - {fileID: 378463802}
+  - {fileID: 1194148338}
+  - {fileID: 1148595935}
+  - {fileID: 1756084138}
+  - {fileID: 965142300}
   - {fileID: 1063525793}
+  - {fileID: 1923481975}
+  - {fileID: 1145374241}
+  - {fileID: 1489432140}
+  - {fileID: 2139902590}
+  - {fileID: 1124490622}
+  - {fileID: 496099778}
+  - {fileID: 324637403}
+  - {fileID: 1384102548}
+  - {fileID: 13116928}
+  - {fileID: 459774260}
+  - {fileID: 1030650487}
+  - {fileID: 380016401}
+  - {fileID: 923738534}
+  - {fileID: 1566269091}
+  - {fileID: 966688589}
+  - {fileID: 1687723613}
+  - {fileID: 841874799}
+  - {fileID: 1720735655}
+  - {fileID: 469219933}
+  - {fileID: 1185862984}
+  - {fileID: 1474330211}
+  - {fileID: 881591911}
+  - {fileID: 1295286074}
+  - {fileID: 635576510}
+  - {fileID: 1808898422}
+  - {fileID: 276452872}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1272068650 stripped

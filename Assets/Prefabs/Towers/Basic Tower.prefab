@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 3019970742058870914}
   - component: {fileID: 8285946271928699119}
   - component: {fileID: 2844882205256046815}
-  - component: {fileID: 3265150588818311449}
-  - component: {fileID: 2336275966479710071}
   - component: {fileID: 5409333875282112141}
   - component: {fileID: 4485806926785203642}
   - component: {fileID: -6861502671816601745}
@@ -118,35 +116,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3265150588818311449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1170612411488841515}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 056486fd94f064344a19003986234232, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TowerSingleAttack
-  damage: 1
-  fireRate: 1
-  attackRadius: 2
-  attackPattern: 0
---- !u!114 &2336275966479710071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1170612411488841515}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e92fc729f781846398d427aced8deb0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  cost: 50
 --- !u!114 &5409333875282112141
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,13 +9,6 @@ public class EconomyManager : MonoBehaviour
     public int Money { get; private set; } = 100;
     public int Level { get; private set; } = 1;
     
-    private GameObject _endBlock;
-
-    private void Start()
-    {
-        _endBlock = GameObject.Find("EndBlock");
-    }
-
     public void GainMoney(int amount)
     {
         Money += amount;
@@ -29,7 +22,7 @@ public class EconomyManager : MonoBehaviour
     public void DealDamage(int damage)
     {
         HP -= damage;
-        _endBlock.GetComponent<ColorPulse>().Pulse();
+        GameObject.Find("EndBlock").GetComponent<ColorPulse>().Pulse();
     }
 
     public void NextLevel()
