@@ -9,11 +9,13 @@ public class EconomyManager : MonoBehaviour
     public int HP { get; private set; } = 100;
     public int Money { get; private set; } = 100;
     public int Level { get; private set; } = 1;
+    
+    [Tooltip("How long the Game Over message should appear before game resets.")]
+    [SerializeField] private float gameOverDelay = 5f;
 
     [SerializeField] private bool overrideStartingValues;
     [SerializeField] private int customStartingMoney = 1000;
     [SerializeField] private int customStartingHP = 10;
-    [SerializeField] private float gameOverDelay = 5f;
     
     private void Start()
     {
