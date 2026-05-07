@@ -73,11 +73,21 @@ public class TowerShopUI : MonoBehaviour
 
     /// <summary>Default state: no tile selected, no pending action.</summary>
     // Tracks the indicator on whichever tower is currently selected.
-    private RadiusIndicator _activeIndicator;
+    private RadiusIndicator      _activeIndicator;
+    private AttackPatternDropdown _activeDropdown;
+
+    // Patterns offered for targeting towers (not Area/Slow which have no target choice).
+    private static readonly TowerAttack.AttackPattern[] TargetingPatterns =
+    {
+        TowerAttack.AttackPattern.AttackFirst,
+        TowerAttack.AttackPattern.AttackLast,
+        TowerAttack.AttackPattern.AttackClosest,
+    };
 
     public void ShowIdle()
     {
         HideActiveIndicator();
+        HideActiveDropdown();
         SetSellUpgradeVisible(false);
         cancelButton.gameObject.SetActive(false);
         towerInfoPanel.SetActive(false);
@@ -88,6 +98,7 @@ public class TowerShopUI : MonoBehaviour
     public void ShowPendingPlacement(TowerData data)
     {
         HideActiveIndicator();
+        HideActiveDropdown();
         SetSellUpgradeVisible(false);
         cancelButton.gameObject.SetActive(true);
         towerInfoPanel.SetActive(true);
@@ -102,6 +113,7 @@ public class TowerShopUI : MonoBehaviour
     public void ShowOccupied(PlacedTower tower)
     {
         HideActiveIndicator();
+        HideActiveDropdown();
         cancelButton.gameObject.SetActive(false);
 
         if (tower == null)
@@ -117,22 +129,35 @@ public class TowerShopUI : MonoBehaviour
         towerInfoPanel.SetActive(true);
         towerNameText.text = data.towerName;
         towerDescText.text = data.description;
-        towerCostText.text = $"Sell: {data.sellValue} gold\nUpgrade: {data.upgradeCost} gold";
+        towerCostText.text = $"Sell: {data.sellValue} gold  |  Upgrade: {data.upgradeCost} gold";
         statusText.text    = $"{data.towerName} selected.";
 
         SetSellUpgradeVisible(true);
 
-        // Show the attack radius ring if the tower has a TowerAttack component.
         TowerAttack attack = tower.GetComponent<TowerAttack>();
         if (attack != null)
         {
-            // Add RadiusIndicator at runtime if the prefab doesn't already have one.
+            // Radius indicator
             RadiusIndicator indicator = tower.GetComponent<RadiusIndicator>();
             if (indicator == null)
                 indicator = tower.gameObject.AddComponent<RadiusIndicator>();
 
             indicator.Show(attack.attackRadius);
             _activeIndicator = indicator;
+
+            // Attack pattern dropdown — only for targeting patterns, not Area/Slow
+            bool isTargetingTower = attack.attackPattern != TowerAttack.AttackPattern.Area
+                                 && attack.attackPattern != TowerAttack.AttackPattern.Slow;
+            if (isTargetingTower)
+            {
+                AttackPatternDropdown dropdown = tower.GetComponent<AttackPatternDropdown>();
+                if (dropdown == null)
+                    dropdown = tower.gameObject.AddComponent<AttackPatternDropdown>();
+
+                dropdown.SetCanvasRoot(GetComponentInParent<Canvas>());
+                dropdown.Show(TargetingPatterns);
+                _activeDropdown = dropdown;
+            }
         }
     }
 
@@ -219,5 +244,11 @@ public class TowerShopUI : MonoBehaviour
     {
         _activeIndicator?.Hide();
         _activeIndicator = null;
+    }
+
+    private void HideActiveDropdown()
+    {
+        _activeDropdown?.Hide();
+        _activeDropdown = null;
     }
 }
