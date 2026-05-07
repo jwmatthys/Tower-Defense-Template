@@ -51,7 +51,6 @@ public class GameManager : MonoBehaviour
     private void EndLevel()
     {
         sceneClearedMessage.gameObject.SetActive(true);
-        economyManager.NextLevel();
         StartCoroutine(LoadNextLevel());
     }
 

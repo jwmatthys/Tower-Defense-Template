@@ -25,7 +25,8 @@ public class GUIDisplay : MonoBehaviour
     
     IEnumerator LevelDisplayCoroutine()
     {
-        levelText.text = $"LEVEL {_economyManager.Level}";
+        _economyManager.level += 1;
+        levelText.text = $"LEVEL {_economyManager.level}";
         levelText.gameObject.SetActive(true);
         yield return new WaitForSeconds(levelDisplayTime);
         levelText.gameObject.SetActive(false);

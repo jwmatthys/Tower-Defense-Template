@@ -8,7 +8,7 @@ public class EconomyManager : MonoBehaviour
 
     public int HP { get; private set; } = 100;
     public int Money { get; private set; } = 100;
-    public int Level { get; private set; } = 1;
+    public int level;
     
     [Tooltip("How long the Game Over message should appear before game resets.")]
     [SerializeField] private float gameOverDelay = 5f;
@@ -66,7 +66,7 @@ public class EconomyManager : MonoBehaviour
     
     public void NextLevel()
     {
-        Level++;
+        level++;
     }
     
     
