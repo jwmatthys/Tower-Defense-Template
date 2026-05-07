@@ -97,6 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bdc1f1865082092985ec58db8e565bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyFreezer
-  freezeInterval: 15
-  freezeRadius: 3
+  freezeInterval: 5
+  freezeRadius: 1
   freezeDuration: 5

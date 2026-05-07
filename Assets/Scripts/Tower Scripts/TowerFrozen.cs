@@ -13,6 +13,8 @@ public class TowerFrozen : MonoBehaviour
     {
         if (TryGetComponent(out TowerAttack towerAttack))
         {
+            Debug.Log($"Tower {this.gameObject.name} is freezing.");
+            towerAttack.StopShooting();
             towerAttack.enabled = false;
             yield return new WaitForSeconds(dur);
             towerAttack.enabled = true;

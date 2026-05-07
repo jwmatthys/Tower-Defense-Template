@@ -212,9 +212,6 @@ public class TowerPlacer : GridSelector
 
     private void PlaceTower(GridTile tile, TowerData data)
     {
-        
-        Debug.Log($"Available money: {_economyManager.Money}");
-        
         if (data.prefab == null)
         {
             Debug.LogError($"[TowerPlacer] TowerData '{data.towerName}' has no prefab assigned.");

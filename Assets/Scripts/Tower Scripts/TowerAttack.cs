@@ -26,6 +26,11 @@ public class TowerAttack : MonoBehaviour
         _colorPulse = GetComponent<ColorPulse>();
     }
 
+    public void StopShooting()
+    {
+        StopAllCoroutines();
+    }
+
     private void Update()
     {
         int count = Physics.OverlapSphereNonAlloc(transform.position, attackRadius, _hits, LayerMask.GetMask("Enemy"));

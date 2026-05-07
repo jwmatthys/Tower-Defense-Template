@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 9534c4535a2e02135b9873b7c8c33ce3, type: 2}
     - target: {fileID: 4485806926785203642, guid: a4787c2032c094840ac3071fb9a494ec, type: 3}
       propertyPath: damage
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4485806926785203642, guid: a4787c2032c094840ac3071fb9a494ec, type: 3}
       propertyPath: fireRate
@@ -34,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4485806926785203642, guid: a4787c2032c094840ac3071fb9a494ec, type: 3}
       propertyPath: attackInterval
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6008422108269342660, guid: a4787c2032c094840ac3071fb9a494ec, type: 3}
       propertyPath: m_LocalPosition.x
