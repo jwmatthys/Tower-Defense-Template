@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SlowTower
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   towerName: Slowing Tower
-  description: A tower that slows enemies.
+  description: Slows all enemies in range.
   icon: {fileID: 0}
   prefab: {fileID: 2364605008431984011, guid: 466e64936984582c49b81934815605f9, type: 3}
   buyCost: 250

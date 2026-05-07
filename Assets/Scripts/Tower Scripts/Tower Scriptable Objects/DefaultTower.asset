@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DefaultTower
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   towerName: Basic Tower
-  description: A basic tower.
+  description: Targets a single enemy.
   icon: {fileID: 0}
   prefab: {fileID: 1170612411488841515, guid: a4787c2032c094840ac3071fb9a494ec, type: 3}
   buyCost: 50

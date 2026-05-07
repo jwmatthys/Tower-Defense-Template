@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MoneyTower
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   towerName: Money Tower
-  description: A tower that generates money.
+  description: Generates money.
   icon: {fileID: 0}
   prefab: {fileID: 6813651392721706314, guid: 5a7cdf94a5f934b9c8f3ed7dbb275df8, type: 3}
   buyCost: 200

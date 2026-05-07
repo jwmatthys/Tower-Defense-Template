@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AreaTower
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   towerName: Area Attack Tower
-  description: Area Attack Tower
+  description: Attacks all enemies in range.
   icon: {fileID: 0}
   prefab: {fileID: 7128121266419329029, guid: 4d106731b83fb438d8095bbbd9419963, type: 3}
   buyCost: 75
