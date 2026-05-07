@@ -8,7 +8,15 @@ public class EconomyManager : MonoBehaviour
     public int HP { get; private set; } = 100;
     public int Money { get; private set; } = 100;
     public int Level { get; private set; } = 1;
-    
+
+    [SerializeField] private bool overrideStartingMoney;
+    [SerializeField] private int customStartingMoney = 1000;
+
+    private void Start()
+    {
+        if (overrideStartingMoney) Money = customStartingMoney;
+    }
+
     public void GainMoney(int amount)
     {
         Money += amount;
