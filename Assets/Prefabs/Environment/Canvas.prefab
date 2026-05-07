@@ -1085,7 +1085,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9830d7a305d2f44a44e69e806e0de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerShopUI
-  towerPlacer: {fileID: 0}
   towerTypes:
   - {fileID: 11400000, guid: a87117ae4ef96370593fadb8f8e83d26, type: 2}
   - {fileID: 11400000, guid: 466829d93ee516beb9a2dc8c4ed63a08, type: 2}

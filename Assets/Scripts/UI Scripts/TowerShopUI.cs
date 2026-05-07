@@ -28,8 +28,7 @@ public class TowerShopUI : MonoBehaviour
     // Inspector — wiring
     // -----------------------------------------------------------------------
 
-    [Header("Placer Reference")]
-    [SerializeField] private TowerPlacer towerPlacer;
+    private TowerPlacer towerPlacer;
 
     [Header("Tower Types")]
     [Tooltip("All tower ScriptableObjects to show in the shop.")]
@@ -62,6 +61,7 @@ public class TowerShopUI : MonoBehaviour
 
     void Start()
     {
+        towerPlacer = FindAnyObjectByType<GameManager>().GetComponent<TowerPlacer>();
         BuildTowerButtons();
         SetupStaticListeners();
         ShowIdle();

@@ -42,6 +42,7 @@ public class EconomyManager : MonoBehaviour
         GameObject.Find("EndBlock").GetComponent<ColorPulse>().Pulse();
         if (HP <= 0)
         {
+            HP = 0;
             StartCoroutine(GameOver());
         }
     }
@@ -50,6 +51,13 @@ public class EconomyManager : MonoBehaviour
     {
         Debug.Log("Game Over");
         GameObject.Find("Canvas/Titles/GameOverText").SetActive(true);
+
+        foreach (TowerAttack attack in FindObjectsByType<TowerAttack>())
+        {
+            attack.StopShooting();
+            attack.enabled = false;
+        }
+        
         yield return new WaitForSeconds(gameOverDelay);
         Instance = null;
         Destroy(gameObject);

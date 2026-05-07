@@ -4401,10 +4401,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2157895546093895868, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3658002038239030584, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -4425,10 +4421,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6185017680430596197, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
-      propertyPath: towerPlacer
-      value: 
-      objectReference: {fileID: 6254163507836106964}
     - target: {fileID: 6281371926245717486, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4545,17 +4537,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e391d089486b402dae7d45cf3f7567c, type: 3}
---- !u!114 &6254163507836106964 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4711131459076724107, guid: 1e391d089486b402dae7d45cf3f7567c, type: 3}
-  m_PrefabInstance: {fileID: 6254163507836106953}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bd76800eba39cb7380e3e9b75e2b5e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TowerPlacer
 --- !u!1001 &6342854379188421928
 PrefabInstance:
   m_ObjectHideFlags: 0
