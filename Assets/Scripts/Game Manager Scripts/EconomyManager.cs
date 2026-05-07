@@ -1,5 +1,6 @@
-using System;
 using UnityEngine;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class EconomyManager : MonoBehaviour
 {
@@ -9,12 +10,18 @@ public class EconomyManager : MonoBehaviour
     public int Money { get; private set; } = 100;
     public int Level { get; private set; } = 1;
 
-    [SerializeField] private bool overrideStartingMoney;
+    [SerializeField] private bool overrideStartingValues;
     [SerializeField] private int customStartingMoney = 1000;
-
+    [SerializeField] private int customStartingHP = 10;
+    [SerializeField] private float gameOverDelay = 5f;
+    
     private void Start()
     {
-        if (overrideStartingMoney) Money = customStartingMoney;
+        if (overrideStartingValues)
+        {
+            Money = customStartingMoney;
+            HP = customStartingHP;
+        }
     }
 
     public void GainMoney(int amount)
@@ -31,8 +38,22 @@ public class EconomyManager : MonoBehaviour
     {
         HP -= damage;
         GameObject.Find("EndBlock").GetComponent<ColorPulse>().Pulse();
+        if (HP <= 0)
+        {
+            StartCoroutine(GameOver());
+        }
     }
 
+    private IEnumerator GameOver()
+    {
+        Debug.Log("Game Over");
+        GameObject.Find("Canvas/Titles/GameOverText").SetActive(true);
+        yield return new WaitForSeconds(gameOverDelay);
+        Instance = null;
+        Destroy(gameObject);
+        SceneManager.LoadScene(0);
+    }
+    
     public void NextLevel()
     {
         Level++;
