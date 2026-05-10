@@ -95,7 +95,5 @@ public class TowerData : ScriptableObject
         return sellValue;
     }
 
-    [Header("Placement")]
-    [Tooltip("Y-axis offset from the grid tile's position when spawned.")]
-    public float yOffset = 0.5f;
 }
+

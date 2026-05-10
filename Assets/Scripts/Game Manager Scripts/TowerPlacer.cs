@@ -270,7 +270,7 @@ public class TowerPlacer : GridSelector
         }
         
         _economyManager.SpendMoney(data.buyCost);
-        Vector3 spawnPos = tile.transform.position + Vector3.up * data.yOffset;
+        Vector3 spawnPos = new Vector3(tile.transform.position.x, 1f, tile.transform.position.z);
         GameObject go    = Instantiate(data.prefab, spawnPos, Quaternion.identity);
 
         PlacedTower placed = go.GetComponent<PlacedTower>();
