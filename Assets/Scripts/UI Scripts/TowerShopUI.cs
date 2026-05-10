@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -55,6 +56,18 @@ public class TowerShopUI : MonoBehaviour
     [Tooltip("Prefab with a Button component, an Image child for the icon, and a TextMeshProUGUI child for the label.")]
     [SerializeField] private GameObject towerButtonPrefab;
 
+    [Header("Selection")]
+    [Tooltip("How long to keep a selected tower visible before auto-deselecting.")]
+    [SerializeField] private float selectionDisplayDuration = 3f;
+
+    [Header("Status Messages")]
+    [Tooltip("How long to show temporary status messages such as insufficient funds.")]
+    [SerializeField] private float statusMessageDuration = 2f;
+
+    private Coroutine _autoDeselectCoroutine;
+    private Coroutine _statusMessageCoroutine;
+    private string _statusTextBackup;
+
     // -----------------------------------------------------------------------
     // Lifecycle
     // -----------------------------------------------------------------------
@@ -86,6 +99,8 @@ public class TowerShopUI : MonoBehaviour
 
     public void ShowIdle()
     {
+        CancelAutoDeselect();
+        CancelStatusMessage();
         HideActiveIndicator();
         HideActiveDropdown();
         SetSellUpgradeVisible(false);
@@ -97,6 +112,8 @@ public class TowerShopUI : MonoBehaviour
     /// <summary>A tower type has been chosen; waiting for the player to click a tile.</summary>
     public void ShowPendingPlacement(TowerData data)
     {
+        CancelAutoDeselect();
+        CancelStatusMessage();
         HideActiveIndicator();
         HideActiveDropdown();
         SetSellUpgradeVisible(false);
@@ -127,12 +144,36 @@ public class TowerShopUI : MonoBehaviour
         TowerData data = tower.Data;
 
         towerInfoPanel.SetActive(true);
-        towerNameText.text = data.towerName;
+        towerNameText.text = $"{data.towerName} (Level {tower.Level})";
         towerDescText.text = data.description;
-        towerCostText.text = $"Sell: {data.sellValue} gold\nUpgrade: {data.upgradeCost} gold";
-        statusText.text    = $"{data.towerName} selected.";
 
-        SetSellUpgradeVisible(true);
+        // Show sell value
+        int sellValue = tower.CurrentSellValue;
+        string costText = $"Sell: {sellValue} gold";
+
+        // Show upgrade cost if available
+        if (tower.Level - 1 < data.upgrades.Count)
+        {
+            int upgradeCost = data.upgrades[tower.Level - 1].cost;
+            costText += $"\nUpgrade: {upgradeCost} gold";
+        }
+        else
+        {
+            costText += "\nMax Level";
+        }
+
+        towerCostText.text = costText;
+        statusText.text    = $"{data.towerName} Level {tower.Level} selected.";
+
+        // Only show upgrade button if there are more upgrades available
+        bool canUpgrade = tower.Level - 1 < data.upgrades.Count;
+        sellButton.gameObject.SetActive(true);
+        upgradeButton.gameObject.SetActive(canUpgrade);
+
+        if (selectionDisplayDuration > 0f)
+            StartAutoDeselectCountdown();
+
+        CancelStatusMessage();
 
         TowerAttack attack = tower.GetComponent<TowerAttack>();
         if (attack != null)
@@ -142,7 +183,7 @@ public class TowerShopUI : MonoBehaviour
             if (indicator == null)
                 indicator = tower.gameObject.AddComponent<RadiusIndicator>();
 
-            indicator.Show(attack.attackRadius);
+            indicator.Show(attack.GetCurrentAttackRadius());
             _activeIndicator = indicator;
 
             // Attack pattern dropdown — only for targeting patterns, not Area/Slow
@@ -238,6 +279,51 @@ public class TowerShopUI : MonoBehaviour
     {
         sellButton.gameObject.SetActive(visible);
         upgradeButton.gameObject.SetActive(visible);
+    }
+
+    private void StartAutoDeselectCountdown()
+    {
+        CancelAutoDeselect();
+        _autoDeselectCoroutine = StartCoroutine(AutoDeselectRoutine());
+    }
+
+    private void CancelAutoDeselect()
+    {
+        if (_autoDeselectCoroutine != null)
+        {
+            StopCoroutine(_autoDeselectCoroutine);
+            _autoDeselectCoroutine = null;
+        }
+    }
+
+    private void CancelStatusMessage()
+    {
+        if (_statusMessageCoroutine != null)
+        {
+            StopCoroutine(_statusMessageCoroutine);
+            _statusMessageCoroutine = null;
+        }
+    }
+
+    public void ShowTemporaryStatus(string message)
+    {
+        CancelStatusMessage();
+        _statusTextBackup = statusText.text;
+        statusText.text = message;
+        _statusMessageCoroutine = StartCoroutine(StatusMessageRoutine());
+    }
+
+    private IEnumerator StatusMessageRoutine()
+    {
+        yield return new WaitForSeconds(statusMessageDuration);
+        statusText.text = _statusTextBackup;
+        _statusMessageCoroutine = null;
+    }
+
+    private IEnumerator AutoDeselectRoutine()
+    {
+        yield return new WaitForSeconds(selectionDisplayDuration);
+        towerPlacer?.DeselectTower();
     }
 
     private void HideActiveIndicator()

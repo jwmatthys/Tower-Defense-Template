@@ -13,10 +13,29 @@ public class PlacedTower : MonoBehaviour
     /// <summary>The tile this tower is sitting on.</summary>
     public GridTile OccupiedTile { get; private set; }
 
+    /// <summary>The current upgrade level of this tower (starts at 1).</summary>
+    public int Level { get; private set; } = 1;
+
+    public int CurrentSellValue => Data != null ? Data.GetSellValueForLevel(Level) : 0;
+
     /// <summary>Called once immediately after the tower is instantiated.</summary>
     public void Initialize(TowerData data, GridTile tile)
     {
         Data         = data;
         OccupiedTile = tile;
+        Level        = 1;
+
+        // Apply upgrades to ensure tower stats are correct
+        TowerAttack attack = GetComponent<TowerAttack>();
+        if (attack != null)
+        {
+            attack.ApplyUpgrades();
+        }
+    }
+
+    /// <summary>Increases the tower's level by 1.</summary>
+    public void Upgrade()
+    {
+        Level++;
     }
 }

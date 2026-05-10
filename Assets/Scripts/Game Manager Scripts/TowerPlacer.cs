@@ -166,7 +166,7 @@ public class TowerPlacer : GridSelector
         }
 
         GridTile tile = _selectedPlacedTower.OccupiedTile;
-        int refund    = _selectedPlacedTower.Data.sellValue;
+        int refund    = _selectedPlacedTower.CurrentSellValue;
 
         Debug.Log($"[TowerPlacer] Sold {_selectedPlacedTower.Data.towerName} for {refund} gold.");
 
@@ -182,7 +182,7 @@ public class TowerPlacer : GridSelector
     }
 
     /// <summary>
-    /// Upgrade the tower on the currently selected occupied tile. Placeholder.
+    /// Upgrade the tower on the currently selected occupied tile.
     /// </summary>
     public void RequestUpgrade()
     {
@@ -192,11 +192,55 @@ public class TowerPlacer : GridSelector
             return;
         }
 
-        int cost = _selectedPlacedTower.Data.upgradeCost;
-        Debug.Log($"[TowerPlacer] Upgrade requested for {_selectedPlacedTower.Data.towerName} " +
-                  $"(cost: {cost} gold). Upgrade logic not yet implemented.");
+        TowerData data = _selectedPlacedTower.Data;
+        int currentLevel = _selectedPlacedTower.Level;
 
-        // TODO: implement upgrade logic (swap prefab, boost stats, etc.)
+        // Check if there are more upgrades available
+        if (currentLevel - 1 >= data.upgrades.Count)
+        {
+            Debug.Log("[TowerPlacer] Tower is already at maximum upgrade level.");
+            return;
+        }
+
+        // Get the cost for the next upgrade
+        int cost = data.upgrades[currentLevel - 1].cost;
+
+        if (!_economyManager.TrySpendGold(cost))
+        {
+            Debug.Log("[TowerPlacer] Not enough gold for upgrade.");
+            shopUI?.ShowTemporaryStatus("Not enough money for upgrade");
+            return;
+        }
+
+        // Upgrade the tower
+        _selectedPlacedTower.Upgrade();
+
+        // Apply stat upgrades to the tower components
+        TowerAttack attack = _selectedPlacedTower.GetComponent<TowerAttack>();
+        if (attack != null)
+        {
+            attack.ApplyUpgrades();
+        }
+
+        // Update the radius indicator if it exists
+        RadiusIndicator indicator = _selectedPlacedTower.GetComponent<RadiusIndicator>();
+        if (indicator != null)
+        {
+            indicator.Show(attack != null ? attack.GetCurrentAttackRadius() : 2f);
+        }
+
+        Debug.Log($"[TowerPlacer] Upgraded {_selectedPlacedTower.Data.towerName} to level {_selectedPlacedTower.Level} for {cost} gold.");
+
+        // Refresh the UI to show updated stats
+        shopUI?.ShowOccupied(_selectedPlacedTower);
+    }
+
+    /// <summary>Deselects the currently selected tower and returns the UI to idle state.</summary>
+    public void DeselectTower()
+    {
+        _selectedPlacedTower = null;
+        ClearSelection();
+        shopUI?.ShowIdle();
     }
 
     /// <summary>Cancel a pending placement.</summary>
@@ -221,6 +265,7 @@ public class TowerPlacer : GridSelector
         if (data.buyCost > _economyManager.Money)
         {
             Debug.LogWarning($"[TowerPlacer] TowerData '{data.towerName}' cost exceeds available money.");
+            shopUI?.ShowTemporaryStatus("Not enough money for tower");
             return;
         }
         

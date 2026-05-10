@@ -17,6 +17,32 @@ MonoBehaviour:
   icon: {fileID: 0}
   prefab: {fileID: 6813651392721706314, guid: 5a7cdf94a5f934b9c8f3ed7dbb275df8, type: 3}
   buyCost: 200
-  upgradeCost: 150
   sellValue: 100
+  damage: 1
+  attackInterval: 1
+  attackRadius: 2
+  slowFactor: 2
+  slowDuration: 5
+  upgrades:
+  - cost: 150
+    damage: 1.0
+    attackInterval: 0.9
+    attackRadius: 2.0
+    slowFactor: 2
+    slowDuration: 5
+    sellValue: 60
+  - cost: 200
+    damage: 1.0
+    attackInterval: 0.8
+    attackRadius: 2.0
+    slowFactor: 2
+    slowDuration: 5
+    sellValue: 80
+  - cost: 250
+    damage: 1.0
+    attackInterval: 0.6
+    attackRadius: 2.0
+    slowFactor: 2
+    slowDuration: 5
+    sellValue: 100
   yOffset: 1

@@ -36,6 +36,17 @@ public class EconomyManager : MonoBehaviour
         Money -= amount;
     }
 
+    /// <summary>Attempts to spend gold. Returns true if successful, false if insufficient funds.</summary>
+    public bool TrySpendGold(int amount)
+    {
+        if (Money >= amount)
+        {
+            SpendMoney(amount);
+            return true;
+        }
+        return false;
+    }
+
     public void DealDamage(int damage)
     {
         HP -= damage;

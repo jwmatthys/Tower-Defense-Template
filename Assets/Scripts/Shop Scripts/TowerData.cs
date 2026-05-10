@@ -1,4 +1,35 @@
 using UnityEngine;
+using System.Collections.Generic;
+
+/// <summary>
+/// Defines the target tower stats for a single upgrade level.
+/// </summary>
+[System.Serializable]
+public class TowerUpgrade
+{
+    [Tooltip("Gold cost for this upgrade.")]
+    public int cost = 100;
+
+    [Header("Target Stats")]
+    [Tooltip("Damage after this upgrade.")]
+    public float damage = 1f;
+
+    [Tooltip("Attack interval after this upgrade.")]
+    public float attackInterval = 1f;
+
+    [Tooltip("Attack radius after this upgrade.")]
+    public float attackRadius = 2f;
+
+    [Header("Slow Settings")]
+    [Tooltip("Slow factor after this upgrade.")]
+    public float slowFactor = 2f;
+
+    [Tooltip("Slow duration after this upgrade.")]
+    public float slowDuration = 5f;
+
+    [Tooltip("Sell value after this upgrade.")]
+    public int sellValue = 50;
+}
 
 /// <summary>
 /// ScriptableObject that defines a tower type.
@@ -26,11 +57,43 @@ public class TowerData : ScriptableObject
     [Tooltip("Gold cost to place this tower.")]
     public int buyCost = 100;
 
-    [Tooltip("Gold cost to upgrade this tower (placeholder).")]
-    public int upgradeCost = 150;
-
     [Tooltip("Gold returned when this tower is sold.")]
     public int sellValue = 50;
+
+    [Header("Base Stats")]
+    [Tooltip("Base damage for this tower.")]
+    public float damage = 1f;
+
+    [Tooltip("Base attack interval for this tower.")]
+    public float attackInterval = 1f;
+
+    [Tooltip("Base attack radius for this tower.")]
+    public float attackRadius = 2f;
+
+    [Tooltip("Base slow factor for this tower.")]
+    public float slowFactor = 2f;
+
+    [Tooltip("Base slow duration for this tower.")]
+    public float slowDuration = 5f;
+
+    [Header("Upgrades")]
+    [Tooltip("List of available upgrades for this tower. Each upgrade defines the target stats after that upgrade.")]
+    public List<TowerUpgrade> upgrades = new();
+
+    public int GetSellValueForLevel(int level)
+    {
+        if (level <= 1 || upgrades == null || upgrades.Count == 0)
+            return sellValue;
+
+        int index = level - 2;
+        if (index >= 0 && index < upgrades.Count)
+        {
+            int value = upgrades[index].sellValue;
+            return value > 0 ? value : sellValue;
+        }
+
+        return sellValue;
+    }
 
     [Header("Placement")]
     [Tooltip("Y-axis offset from the grid tile's position when spawned.")]
