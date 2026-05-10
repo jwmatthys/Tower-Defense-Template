@@ -16,7 +16,7 @@ MonoBehaviour:
   description: Attacks all enemies in range.
   icon: {fileID: 0}
   prefab: {fileID: 7128121266419329029, guid: 4d106731b83fb438d8095bbbd9419963, type: 3}
-  buyCost: 75
-  upgradeCost: 150
+  buyCost: 150
+  upgradeCost: 300
   sellValue: 50
   yOffset: 1

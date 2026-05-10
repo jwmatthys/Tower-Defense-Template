@@ -288,7 +288,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c960a07247344fe2b44765954609c61, type: 3}
-  m_Name: Spawn Track (2)
+  m_Name: Tanks
   m_EditorClassIdentifier: Assembly-CSharp::SpawnTrack
   m_Version: 3
   m_AnimClip: {fileID: 0}
@@ -404,7 +404,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c960a07247344fe2b44765954609c61, type: 3}
-  m_Name: Spawn Track (3)
+  m_Name: Freezers
   m_EditorClassIdentifier: Assembly-CSharp::SpawnTrack
   m_Version: 3
   m_AnimClip: {fileID: 0}
@@ -528,7 +528,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c960a07247344fe2b44765954609c61, type: 3}
-  m_Name: Spawn Track (1)
+  m_Name: Speedy Enemies
   m_EditorClassIdentifier: Assembly-CSharp::SpawnTrack
   m_Version: 3
   m_AnimClip: {fileID: 0}
@@ -708,6 +708,6 @@ MonoBehaviour:
   m_Name: SpawnClip
   m_EditorClassIdentifier: Assembly-CSharp::SpawnClip
   template:
-    spawnerPrefab: {fileID: 1219984003736097598, guid: 640fcad230b1f4737aaedc91bcf5e2df, type: 3}
+    spawnerPrefab: {fileID: 1219984003736097598, guid: 257518de44f04b54dbe5de54e91d8de0, type: 3}
     enemyPrefab: {fileID: 4465019377029705615, guid: eec16f6884fd1c4688c91da313bcffdb, type: 3}
-    timeBetweenSpawns: 5
+    timeBetweenSpawns: 1

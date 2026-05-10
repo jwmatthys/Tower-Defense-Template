@@ -129,7 +129,7 @@ public class TowerShopUI : MonoBehaviour
         towerInfoPanel.SetActive(true);
         towerNameText.text = data.towerName;
         towerDescText.text = data.description;
-        towerCostText.text = $"Sell: {data.sellValue} gold  |  Upgrade: {data.upgradeCost} gold";
+        towerCostText.text = $"Sell: {data.sellValue} gold\nUpgrade: {data.upgradeCost} gold";
         statusText.text    = $"{data.towerName} selected.";
 
         SetSellUpgradeVisible(true);

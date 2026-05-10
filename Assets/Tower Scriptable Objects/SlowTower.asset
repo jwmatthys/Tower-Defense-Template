@@ -18,5 +18,5 @@ MonoBehaviour:
   prefab: {fileID: 2364605008431984011, guid: 466e64936984582c49b81934815605f9, type: 3}
   buyCost: 250
   upgradeCost: 300
-  sellValue: 150
+  sellValue: 100
   yOffset: 1
