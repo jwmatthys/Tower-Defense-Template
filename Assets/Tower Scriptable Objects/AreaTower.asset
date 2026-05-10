@@ -45,4 +45,4 @@ MonoBehaviour:
     slowFactor: 2
     slowDuration: 5
     sellValue: 80
-  yOffset: 1
+  yOffset: 0.875

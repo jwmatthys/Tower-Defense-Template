@@ -10,8 +10,11 @@ public class RadiusIndicator : MonoBehaviour
     [Tooltip("Number of triangle slices forming the circle. Higher = smoother.")]
     [SerializeField] private int segments = 64;
 
-    [Tooltip("Y offset above the tower's pivot so the disc sits just above the ground.")]
+    [Tooltip("Additional world-space Y offset above the grid plane.")]
     [SerializeField] private float yOffset = 0.05f;
+
+    [Tooltip("Fixed world-space Y position for the indicator disc on the grid plane.")]
+    [SerializeField] private float gridPlaneY = 0.5f;
 
     [Tooltip("Transparent URP Unlit material to use for the disc.")]
     [SerializeField] private Material discMaterial;
@@ -29,11 +32,11 @@ public class RadiusIndicator : MonoBehaviour
         if (discMaterial == null)
             Debug.LogWarning($"[RadiusIndicator] on '{gameObject.name}': No material assigned.");
 
-        // Create a dedicated child object so the mesh doesn't interfere with
-        // the tower's own renderer.
+        // Create a dedicated world-space object so the disc does not move with
+        // the tower's model height or scale.
         _discObject = new GameObject("RadiusDisc");
-        _discObject.transform.SetParent(transform, worldPositionStays: false);
-        _discObject.transform.localPosition = Vector3.up * yOffset;
+        _discObject.transform.SetParent(null);
+        _discObject.transform.position = new Vector3(transform.position.x, gridPlaneY + yOffset, transform.position.z);
 
         _meshFilter   = _discObject.AddComponent<MeshFilter>();
         _meshRenderer = _discObject.AddComponent<MeshRenderer>();

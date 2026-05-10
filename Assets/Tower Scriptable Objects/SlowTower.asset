@@ -25,24 +25,24 @@ MonoBehaviour:
   slowDuration: 5
   upgrades:
   - cost: 300
-    damage: 1.0
+    damage: 1
     attackInterval: 0.95
     attackRadius: 2.3
     slowFactor: 2.5
     slowDuration: 6
     sellValue: 70
   - cost: 400
-    damage: 1.0
-    attackInterval: 0.90
+    damage: 1
+    attackInterval: 0.9
     attackRadius: 2.6
-    slowFactor: 3.0
+    slowFactor: 3
     slowDuration: 7
     sellValue: 90
   - cost: 500
-    damage: 1.0
-    attackInterval: 0.80
+    damage: 1
+    attackInterval: 0.8
     attackRadius: 3.1
-    slowFactor: 4.0
+    slowFactor: 4
     slowDuration: 9
     sellValue: 120
-  yOffset: 1
+  yOffset: 0.875

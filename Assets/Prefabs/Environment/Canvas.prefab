@@ -1299,7 +1299,7 @@ MonoBehaviour:
   towerCostText: {fileID: 1546455659202382357}
   towerButtonPrefab: {fileID: 4555026220932885474, guid: 9d033ed2c8abade35ae788cd820eeab0, type: 3}
   selectionDisplayDuration: 3
-  statusMessageDuration: 2
+  statusMessageDuration: 5
 --- !u!114 &5315536133655316734
 MonoBehaviour:
   m_ObjectHideFlags: 0
