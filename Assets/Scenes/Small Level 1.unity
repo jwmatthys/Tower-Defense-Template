@@ -4714,6 +4714,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2475094627821120848, guid: 32a29ae1dc65f63c192c6f5e2651df3c, type: 3}
+      propertyPath: customStartingHP
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2475094627821120848, guid: 32a29ae1dc65f63c192c6f5e2651df3c, type: 3}
+      propertyPath: overrideStartingValues
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3838462399498436805, guid: 32a29ae1dc65f63c192c6f5e2651df3c, type: 3}
       propertyPath: m_Name
       value: EconomyManager
