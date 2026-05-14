@@ -17,6 +17,7 @@ public class TowerAttack : MonoBehaviour
     private float _currentSlowDuration;
 
     private Coroutine _shootingCoroutine;
+    private float _lastAttackTime = float.NegativeInfinity;
     private readonly Collider[] _hits = new Collider[100];
 
     private Component _triggerAnimation;
@@ -112,6 +113,13 @@ public class TowerAttack : MonoBehaviour
     {
         while (true)
         {
+            // Respect the attack interval even when the coroutine restarts after
+            // a gap with no enemies, so a kill never grants a free instant shot.
+            float remaining = (_lastAttackTime + _currentAttackInterval) - Time.time;
+            if (remaining > 0f)
+                yield return new WaitForSeconds(remaining);
+
+            _lastAttackTime = Time.time;
             _triggerAnimation?.SendMessage("Play", SendMessageOptions.DontRequireReceiver);
 
             switch (attackPattern)
