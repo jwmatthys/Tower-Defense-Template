@@ -7,11 +7,11 @@ public class EnemyHealth : MonoBehaviour
     public int reward = 25;
     private float _maxHealth;
     
-    private ColorPulse _colorPulse;
+    private Component _triggerAnimation;
 
     private void Awake()
     {
-        _colorPulse = GetComponent<ColorPulse>();
+        _triggerAnimation = GetComponent("TriggerAnimation");
         _maxHealth = HP;
     }
 
@@ -20,9 +20,9 @@ public class EnemyHealth : MonoBehaviour
         return _maxHealth;
     }
 
-    public void  TakeDamage(float amount)
+    public void TakeDamage(float amount)
     {
-        _colorPulse.Pulse();
+        _triggerAnimation?.SendMessage("Play", SendMessageOptions.DontRequireReceiver);
         HP -= amount;
         if (HP <= 0f)
         {

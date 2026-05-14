@@ -19,12 +19,12 @@ public class TowerAttack : MonoBehaviour
     private Coroutine _shootingCoroutine;
     private readonly Collider[] _hits = new Collider[100];
 
-    private ColorPulse _colorPulse;
+    private Component _triggerAnimation;
     private PlacedTower _placedTower;
 
     private void Awake()
     {
-        _colorPulse = GetComponent<ColorPulse>();
+        _triggerAnimation = GetComponent("TriggerAnimation");
         _placedTower = GetComponent<PlacedTower>();
         // Initialize current stats to base values first
         InitializeBaseStats();
@@ -112,7 +112,7 @@ public class TowerAttack : MonoBehaviour
     {
         while (true)
         {
-            _colorPulse.Pulse();
+            _triggerAnimation?.SendMessage("Play", SendMessageOptions.DontRequireReceiver);
 
             switch (attackPattern)
             {

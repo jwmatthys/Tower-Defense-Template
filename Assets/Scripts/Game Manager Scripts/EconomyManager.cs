@@ -50,7 +50,9 @@ public class EconomyManager : MonoBehaviour
     public void DealDamage(int damage)
     {
         HP -= damage;
-        GameObject.Find("EndBlock").GetComponent<ColorPulse>().Pulse();
+        GameObject.Find("EndBlock")
+            .GetComponent("TriggerAnimation")
+            ?.SendMessage("Play", SendMessageOptions.DontRequireReceiver);
         if (HP <= 0)
         {
             HP = 0;

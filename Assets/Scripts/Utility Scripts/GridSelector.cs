@@ -111,10 +111,28 @@ public class GridSelector : MonoBehaviour
 
         Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, rayDistance, tileLayerMask))
-            return hit.collider.GetComponent<GridTile>();
+        // Use RaycastAll so non-tile colliders (e.g. towers/enemies) don't block
+        // selecting the grid tile underneath.
+        RaycastHit[] hits = Physics.RaycastAll(ray, rayDistance, tileLayerMask);
+        if (hits == null || hits.Length == 0)
+            return null;
 
-        return null;
+        GridTile closestTile = null;
+        float closestDistance = float.MaxValue;
+
+        for (int i = 0; i < hits.Length; i++)
+        {
+            GridTile tile = hits[i].collider.GetComponent<GridTile>();
+            if (tile == null) continue;
+
+            if (hits[i].distance < closestDistance)
+            {
+                closestDistance = hits[i].distance;
+                closestTile = tile;
+            }
+        }
+
+        return closestTile;
     }
 
     // -----------------------------------------------------------------------

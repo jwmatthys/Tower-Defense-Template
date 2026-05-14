@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6668197284450805215}
   - component: {fileID: 915255510141313676}
   - component: {fileID: 371216539892632287}
-  - component: {fileID: 4397440296505648305}
+  - component: {fileID: 5967264413253663077}
   m_Layer: 0
   m_Name: EndBlock
   m_TagString: Untagged
@@ -91,7 +91,7 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4397440296505648305
+--- !u!114 &5967264413253663077
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100,9 +100,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5858132906853695874}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d17ae9c81716783f7ac66ac5e2a7abe4, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a87f961e7bb52d1abcf11e80cc911bc, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ColorPulse
+  m_EditorClassIdentifier: Assembly-CSharp::AttackAnimator
+  peakScale: {x: 1, y: 1, z: 1}
+  flashColor: 1
   pulseColor: {r: 0, g: 0, b: 0, a: 1}
-  duration: 0.4
-  attackRatio: 0.3
+  duration: 0.5
+  attackRatio: 0.5

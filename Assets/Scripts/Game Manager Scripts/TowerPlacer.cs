@@ -57,6 +57,14 @@ public class TowerPlacer : GridSelector
         _economyManager = EconomyManager.Instance ?? FindAnyObjectByType<EconomyManager>();
     }
 
+    private EconomyManager GetEconomyManager()
+    {
+        if (_economyManager == null)
+            _economyManager = EconomyManager.Instance ?? FindAnyObjectByType<EconomyManager>();
+
+        return _economyManager;
+    }
+
     protected override void HandleClick()
     {
         // Don't process world clicks when the pointer is over a UI element
@@ -64,6 +72,14 @@ public class TowerPlacer : GridSelector
         if (UnityEngine.EventSystems.EventSystem.current != null &&
             UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
             return;
+
+        // If we're placing a tower, prioritize tile resolution over tower selection
+        // so existing colliders don't block placement clicks.
+        if (_pendingTower != null)
+        {
+            base.HandleClick();
+            return;
+        }
 
         PlacedTower tower = RaycastToPlacedTower();
         if (tower != null)
@@ -159,6 +175,13 @@ public class TowerPlacer : GridSelector
     /// </summary>
     public void RequestSell()
     {
+        EconomyManager economy = GetEconomyManager();
+        if (economy == null)
+        {
+            Debug.LogError("[TowerPlacer] No EconomyManager found while selling.");
+            return;
+        }
+
         if (_selectedPlacedTower == null)
         {
             Debug.LogWarning("[TowerPlacer] RequestSell called but no tower is selected.");
@@ -170,7 +193,7 @@ public class TowerPlacer : GridSelector
 
         Debug.Log($"[TowerPlacer] Sold {_selectedPlacedTower.Data.towerName} for {refund} gold.");
 
-        _economyManager.GainMoney(refund);
+        economy.GainMoney(refund);
         
         Destroy(_selectedPlacedTower.gameObject);
 
@@ -186,6 +209,13 @@ public class TowerPlacer : GridSelector
     /// </summary>
     public void RequestUpgrade()
     {
+        EconomyManager economy = GetEconomyManager();
+        if (economy == null)
+        {
+            Debug.LogError("[TowerPlacer] No EconomyManager found while upgrading.");
+            return;
+        }
+
         if (_selectedPlacedTower == null)
         {
             Debug.LogWarning("[TowerPlacer] RequestUpgrade called but no tower is selected.");
@@ -205,7 +235,7 @@ public class TowerPlacer : GridSelector
         // Get the cost for the next upgrade
         int cost = data.upgrades[currentLevel - 1].cost;
 
-        if (!_economyManager.TrySpendGold(cost))
+        if (!economy.TrySpendGold(cost))
         {
             Debug.Log("[TowerPlacer] Not enough gold for upgrade.");
             shopUI?.ShowTemporaryStatus("Not enough money for upgrade");
@@ -256,20 +286,26 @@ public class TowerPlacer : GridSelector
 
     private void PlaceTower(GridTile tile, TowerData data)
     {
+        EconomyManager economy = GetEconomyManager();
+        if (economy == null)
+        {
+            Debug.LogError("[TowerPlacer] No EconomyManager found while placing tower.");
+            return;
+        }
+
         if (data.prefab == null)
         {
             Debug.LogError($"[TowerPlacer] TowerData '{data.towerName}' has no prefab assigned.");
             return;
         }
 
-        if (data.buyCost > _economyManager.Money)
+        if (!economy.TrySpendGold(data.buyCost))
         {
             Debug.LogWarning($"[TowerPlacer] TowerData '{data.towerName}' cost exceeds available money.");
             shopUI?.ShowTemporaryStatus("Not enough money for tower");
             return;
         }
-        
-        _economyManager.SpendMoney(data.buyCost);
+
         Vector3 spawnPos = tile.transform.position + Vector3.up * data.yOffset;
         GameObject go    = Instantiate(data.prefab, spawnPos, Quaternion.identity);
 
@@ -281,7 +317,7 @@ public class TowerPlacer : GridSelector
 
         tile.gameObject.tag = TAG_OCCUPIED;
 
-        Debug.Log($"[TowerPlacer] Placed {data.towerName} at {spawnPos}.");
+        Debug.Log($"[TowerPlacer] Placed {data.towerName} at {spawnPos}. Remaining money: {economy.Money}");
     }
 
     private static PlacedTower FindTowerOnTile(GridTile tile)

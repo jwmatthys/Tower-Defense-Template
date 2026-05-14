@@ -11,6 +11,14 @@ public class GUIDisplay : MonoBehaviour
     
     private EconomyManager _economyManager;
 
+    private EconomyManager GetEconomyManager()
+    {
+        if (_economyManager == null)
+            _economyManager = EconomyManager.Instance ?? FindAnyObjectByType<EconomyManager>();
+
+        return _economyManager;
+    }
+
     private void Start()
     {
         _economyManager = EconomyManager.Instance ?? FindAnyObjectByType<EconomyManager>();
@@ -19,14 +27,20 @@ public class GUIDisplay : MonoBehaviour
 
     void Update()
     {
-        hpText.text = $"HP: {_economyManager.HP:0}";
-        moneyText.text = $"${_economyManager.Money:0}";
+        EconomyManager economy = GetEconomyManager();
+        if (economy == null) return;
+
+        hpText.text = $"HP: {economy.HP:0}";
+        moneyText.text = $"${economy.Money:0}";
     }
     
     IEnumerator LevelDisplayCoroutine()
     {
-        _economyManager.level += 1;
-        levelText.text = $"LEVEL {_economyManager.level}";
+        EconomyManager economy = GetEconomyManager();
+        if (economy == null) yield break;
+
+        economy.level += 1;
+        levelText.text = $"LEVEL {economy.level}";
         levelText.gameObject.SetActive(true);
         yield return new WaitForSeconds(levelDisplayTime);
         levelText.gameObject.SetActive(false);
