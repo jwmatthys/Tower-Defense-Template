@@ -7,6 +7,7 @@ public class EnemyMover : MonoBehaviour
     public float speed = 1f;
     public int damage = 1;
     [SerializeField] private float yPos = 0.5f;
+    [SerializeField] private Transform model;
 
     private Transform[] _waypoints;
     private int _currentWaypointIndex;
@@ -98,6 +99,13 @@ public class EnemyMover : MonoBehaviour
             transform.position.y,
             target.position.z
         );
+
+        Vector3 direction = (targetPos - transform.position);
+        if (direction != Vector3.zero)
+        {
+            Transform rotationTarget = model != null ? model : transform;
+            rotationTarget.rotation = Quaternion.LookRotation(direction);
+        }
 
         transform.position = Vector3.MoveTowards(
             transform.position,
