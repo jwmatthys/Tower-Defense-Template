@@ -2684,17 +2684,6 @@ Transform:
   - {fileID: 276452872}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1272068650 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3441181475201981985, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
-  m_PrefabInstance: {fileID: 5502088295755950672}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1001 &1292991827
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4401,6 +4390,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2157895546093895868, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2606933793921731633, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3658002038239030584, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -4419,6 +4416,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3834214910150162796, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4566305673961856016, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6185017680430596197, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
@@ -4442,7 +4443,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4566305673961856016, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
+    - {fileID: 2606933793921731633, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
@@ -4457,6 +4460,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9830d7a305d2f44a44e69e806e0de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerShopUI
+--- !u!114 &5502088295755950676 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5315536133655316734, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
+  m_PrefabInstance: {fileID: 5502088295755950672}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14df735adfe4b9343a2a90e02ff0480f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HPandMoneyDisplay
 --- !u!114 &5829044068815403885 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2475094627821120848, guid: 32a29ae1dc65f63c192c6f5e2651df3c, type: 3}
@@ -4529,13 +4543,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 468091661}
     - target: {fileID: 7541471852560107762, guid: 1e391d089486b402dae7d45cf3f7567c, type: 3}
+      propertyPath: guiDisplay
+      value: 
+      objectReference: {fileID: 5502088295755950676}
+    - target: {fileID: 7541471852560107762, guid: 1e391d089486b402dae7d45cf3f7567c, type: 3}
       propertyPath: economyManager
       value: 
       objectReference: {fileID: 5829044068815403885}
     - target: {fileID: 7541471852560107762, guid: 1e391d089486b402dae7d45cf3f7567c, type: 3}
       propertyPath: sceneClearedMessage
       value: 
-      objectReference: {fileID: 1272068650}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

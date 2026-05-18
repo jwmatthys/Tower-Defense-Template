@@ -184,6 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45ae537c1c8e6a7e59cd3377c0205ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  frozenMaterial: {fileID: 2100000, guid: 26eef5dd80e034110a86ce389abbbd35, type: 2}
 --- !u!114 &4485806926785203642
 MonoBehaviour:
   m_ObjectHideFlags: 0

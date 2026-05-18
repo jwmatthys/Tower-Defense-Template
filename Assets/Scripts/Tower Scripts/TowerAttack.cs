@@ -57,6 +57,10 @@ public class TowerAttack : MonoBehaviour
     /// <summary>Recalculates stats based on current level and upgrade definitions.</summary>
     public void ApplyUpgrades()
     {
+        // Re-fetch in case PlacedTower was added dynamically after Awake
+        if (_placedTower == null)
+            _placedTower = GetComponent<PlacedTower>();
+
         // Always start with base stats
         InitializeBaseStats();
 
@@ -90,6 +94,7 @@ public class TowerAttack : MonoBehaviour
     public void StopShooting()
     {
         StopAllCoroutines();
+        _shootingCoroutine = null;
     }
 
     private void Update()
