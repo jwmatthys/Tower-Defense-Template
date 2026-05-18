@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class TowerFrozen : MonoBehaviour
 {
+    private Coroutine _freezeCoroutine;
+
     public void Freeze(float dur)
     {
-        StartCoroutine(FreezeRoutine(dur));
+        if (_freezeCoroutine != null)
+            StopCoroutine(_freezeCoroutine);
+        _freezeCoroutine = StartCoroutine(FreezeRoutine(dur));
     }
 
     private IEnumerator FreezeRoutine(float dur)
@@ -19,5 +23,6 @@ public class TowerFrozen : MonoBehaviour
             yield return new WaitForSeconds(dur);
             towerAttack.enabled = true;
         }
+        _freezeCoroutine = null;
     }
 }

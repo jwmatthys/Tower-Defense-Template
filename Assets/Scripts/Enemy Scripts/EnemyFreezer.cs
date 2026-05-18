@@ -9,10 +9,16 @@ public class EnemyFreezer : MonoBehaviour
 
     private Coroutine _freezingCoroutine;
     private readonly Collider[] _hits = new Collider[50];
+    private int _towerLayerMask;
+
+    private void Awake()
+    {
+        _towerLayerMask = LayerMask.GetMask("Tower");
+    }
 
     private void Update()
     {
-        int count = Physics.OverlapSphereNonAlloc(transform.position, freezeRadius, _hits, LayerMask.GetMask("Tower"));
+        int count = Physics.OverlapSphereNonAlloc(transform.position, freezeRadius, _hits, _towerLayerMask);
 
         if (count > 0 && _freezingCoroutine == null)
             _freezingCoroutine = StartCoroutine(FreezeRoutine());
@@ -34,7 +40,7 @@ public class EnemyFreezer : MonoBehaviour
 
     private void FreezeAll()
     {
-        int count = Physics.OverlapSphereNonAlloc(transform.position, freezeRadius, _hits, LayerMask.GetMask("Tower"));
+        int count = Physics.OverlapSphereNonAlloc(transform.position, freezeRadius, _hits, _towerLayerMask);
         for (int i = 0; i < count; i++)
             _hits[i].GetComponent<TowerFrozen>()?.Freeze(freezeDuration);
     }

@@ -45,4 +45,18 @@ public class GUIDisplay : MonoBehaviour
         yield return new WaitForSeconds(levelDisplayTime);
         levelText.gameObject.SetActive(false);
     }
+
+    public void ShowLevelClear()
+    {
+        StopAllCoroutines();
+        levelText.text = "LEVEL CLEAR";
+        levelText.gameObject.SetActive(true);
+    }
+
+    public void ShowGameOver()
+    {
+        StopAllCoroutines();
+        levelText.text = "GAME OVER";
+        levelText.gameObject.SetActive(true);
+    }
 }

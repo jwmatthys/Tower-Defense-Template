@@ -126,15 +126,10 @@ public class EnemyMover : MonoBehaviour
 
     void ReachEnd()
     {
-        EconomyManager gameManager = FindAnyObjectByType<EconomyManager>();
-        if (gameManager)
-        {
-            gameManager.DealDamage(damage);
-        }
+        if (EconomyManager.Instance != null)
+            EconomyManager.Instance.DealDamage(damage);
         else
-        {
-            Debug.LogError("No GameManager found in scene!");
-        }
+            Debug.LogError("No EconomyManager found in scene!");
 
         Destroy(gameObject);
     }

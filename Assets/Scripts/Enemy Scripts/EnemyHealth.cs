@@ -26,7 +26,7 @@ public class EnemyHealth : MonoBehaviour
         HP -= amount;
         if (HP <= 0f)
         {
-            FindAnyObjectByType<EconomyManager>().GainMoney(reward);
+            EconomyManager.Instance?.GainMoney(reward);
             Destroy(gameObject);
         }
     }

@@ -128,10 +128,12 @@ public class TowerPlacer : GridSelector
 
         if (tile.CompareTag(TAG_AVAILABLE) && _pendingTower != null)
         {
-            PlaceTower(tile, _pendingTower);
-            _pendingTower = null;
-            ClearSelection(); // deselect the tile so it doesn't stay highlighted
-            shopUI?.ShowIdle();
+            if (PlaceTower(tile, _pendingTower))
+            {
+                _pendingTower = null;
+                ClearSelection(); // deselect the tile so it doesn't stay highlighted
+                shopUI?.ShowIdle();
+            }
         }
         else if (tile.CompareTag(TAG_OCCUPIED))
         {
@@ -158,9 +160,11 @@ public class TowerPlacer : GridSelector
         // If an available tile is already selected, place immediately.
         if (SelectedTile != null && SelectedTile.CompareTag(TAG_AVAILABLE))
         {
-            PlaceTower(SelectedTile, data);
-            ClearSelection();
-            shopUI?.ShowIdle();
+            if (PlaceTower(SelectedTile, data))
+            {
+                ClearSelection();
+                shopUI?.ShowIdle();
+            }
             return;
         }
 
@@ -284,26 +288,26 @@ public class TowerPlacer : GridSelector
     // Private helpers
     // -----------------------------------------------------------------------
 
-    private void PlaceTower(GridTile tile, TowerData data)
+    private bool PlaceTower(GridTile tile, TowerData data)
     {
         EconomyManager economy = GetEconomyManager();
         if (economy == null)
         {
             Debug.LogError("[TowerPlacer] No EconomyManager found while placing tower.");
-            return;
+            return false;
         }
 
         if (data.prefab == null)
         {
             Debug.LogError($"[TowerPlacer] TowerData '{data.towerName}' has no prefab assigned.");
-            return;
+            return false;
         }
 
         if (!economy.TrySpendGold(data.buyCost))
         {
-            Debug.LogWarning($"[TowerPlacer] TowerData '{data.towerName}' cost exceeds available money.");
+            Debug.LogWarning($"[TowerPlacer] TowerData '{data.towerName}' exceeds available funds.");
             shopUI?.ShowTemporaryStatus("Not enough money for tower");
-            return;
+            return false;
         }
 
         Vector3 spawnPos = tile.transform.position + Vector3.up * data.yOffset;
@@ -318,6 +322,7 @@ public class TowerPlacer : GridSelector
         tile.gameObject.tag = TAG_OCCUPIED;
 
         Debug.Log($"[TowerPlacer] Placed {data.towerName} at {spawnPos}. Remaining money: {economy.Money}");
+        return true;
     }
 
     private static PlacedTower FindTowerOnTile(GridTile tile)

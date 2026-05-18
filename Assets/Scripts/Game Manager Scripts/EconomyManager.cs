@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class EconomyManager : MonoBehaviour
 {
     public static EconomyManager Instance { get; private set; }
+    public bool IsGameOver { get; private set; }
 
     public int HP { get; private set; } = 100;
     public int Money { get; private set; } = 100;
@@ -62,8 +63,9 @@ public class EconomyManager : MonoBehaviour
 
     private IEnumerator GameOver()
     {
+        IsGameOver = true;
         Debug.Log("Game Over");
-        GameObject.Find("Canvas/Titles/GameOverText").SetActive(true);
+        FindAnyObjectByType<GUIDisplay>()?.ShowGameOver();
 
         foreach (TowerAttack attack in FindObjectsByType<TowerAttack>())
         {

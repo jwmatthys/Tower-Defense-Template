@@ -19,6 +19,7 @@ public class TowerAttack : MonoBehaviour
     private Coroutine _shootingCoroutine;
     private float _lastAttackTime = float.NegativeInfinity;
     private readonly Collider[] _hits = new Collider[100];
+    private int _enemyLayerMask;
 
     private Component _triggerAnimation;
     private PlacedTower _placedTower;
@@ -27,8 +28,7 @@ public class TowerAttack : MonoBehaviour
     {
         _triggerAnimation = GetComponent("TriggerAnimation");
         _placedTower = GetComponent<PlacedTower>();
-        // Initialize current stats to base values first
-        InitializeBaseStats();
+        _enemyLayerMask = LayerMask.GetMask("Enemy");
         ApplyUpgrades();
     }
 
@@ -59,10 +59,6 @@ public class TowerAttack : MonoBehaviour
     {
         // Always start with base stats
         InitializeBaseStats();
-
-        // Get PlacedTower component if not already cached
-        if (_placedTower == null)
-            _placedTower = GetComponent<PlacedTower>();
 
         if (_placedTower == null || _placedTower.Data == null) return;
 
@@ -98,7 +94,7 @@ public class TowerAttack : MonoBehaviour
 
     private void Update()
     {
-        int count = Physics.OverlapSphereNonAlloc(transform.position, _currentAttackRadius, _hits, LayerMask.GetMask("Enemy"));
+        int count = Physics.OverlapSphereNonAlloc(transform.position, _currentAttackRadius, _hits, _enemyLayerMask);
 
         if (count > 0 && _shootingCoroutine == null)
             _shootingCoroutine = StartCoroutine(ShootRoutine());
@@ -135,21 +131,21 @@ public class TowerAttack : MonoBehaviour
 
     private void DealDamageToAll()
     {
-        int count = Physics.OverlapSphereNonAlloc(transform.position, _currentAttackRadius, _hits, LayerMask.GetMask("Enemy"));
+        int count = Physics.OverlapSphereNonAlloc(transform.position, _currentAttackRadius, _hits, _enemyLayerMask);
         for (int i = 0; i < count; i++)
             _hits[i].GetComponent<EnemyHealth>()?.TakeDamage(_currentDamage);
     }
 
     private void ApplySlowToAll()
     {
-        int count = Physics.OverlapSphereNonAlloc(transform.position, _currentAttackRadius, _hits, LayerMask.GetMask("Enemy"));
+        int count = Physics.OverlapSphereNonAlloc(transform.position, _currentAttackRadius, _hits, _enemyLayerMask);
         for (int i = 0; i < count; i++)
             _hits[i].GetComponent<EnemyMover>()?.ApplySlowness(_currentSlowFactor, _currentSlowDuration);
     }
 
     private EnemyHealth GetTarget()
     {
-        int count = Physics.OverlapSphereNonAlloc(transform.position, _currentAttackRadius, _hits, LayerMask.GetMask("Enemy"));
+        int count = Physics.OverlapSphereNonAlloc(transform.position, _currentAttackRadius, _hits, _enemyLayerMask);
         if (count == 0) return null;
 
         EnemyHealth bestHealth = null;

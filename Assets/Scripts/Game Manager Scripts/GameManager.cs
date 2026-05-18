@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
-using TMPro;
 using System.Collections;
 
 public class GameManager : MonoBehaviour
@@ -13,7 +12,7 @@ public class GameManager : MonoBehaviour
     [Tooltip("The EconomyManager keeps track of HP, money, and current level.")]
     [SerializeField] private EconomyManager economyManager;
 
-    [SerializeField] private TextMeshProUGUI sceneClearedMessage;
+    [SerializeField] private GUIDisplay guiDisplay;
     [SerializeField] private PlayableDirector director;
 
     private readonly float _pollInterval = 1f;
@@ -50,7 +49,8 @@ public class GameManager : MonoBehaviour
     
     private void EndLevel()
     {
-        sceneClearedMessage.gameObject.SetActive(true);
+        if (EconomyManager.Instance != null && EconomyManager.Instance.IsGameOver) return;
+        guiDisplay?.ShowLevelClear();
         StartCoroutine(LoadNextLevel());
     }
 

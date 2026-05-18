@@ -62,7 +62,7 @@ public class TowerShopUI : MonoBehaviour
 
     [Header("Status Messages")]
     [Tooltip("How long to show temporary status messages such as insufficient funds.")]
-    [SerializeField] private float statusMessageDuration = 2f;
+    [SerializeField] private float statusMessageDuration = 5f;
 
     private Coroutine _autoDeselectCoroutine;
     private Coroutine _statusMessageCoroutine;
