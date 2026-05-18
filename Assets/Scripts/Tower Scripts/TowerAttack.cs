@@ -14,7 +14,6 @@ public class TowerAttack : MonoBehaviour
     private float _currentAttackInterval;
     private float _currentAttackRadius;
     private float _currentSlowFactor;
-    private float _currentSlowDuration;
 
     private Coroutine _shootingCoroutine;
     private float _lastAttackTime = float.NegativeInfinity;
@@ -42,7 +41,6 @@ public class TowerAttack : MonoBehaviour
             _currentAttackInterval = Mathf.Max(0.1f, data.attackInterval);
             _currentAttackRadius = Mathf.Max(0.1f, data.attackRadius);
             _currentSlowFactor = Mathf.Max(0.1f, data.slowFactor);
-            _currentSlowDuration = Mathf.Max(0.1f, data.slowDuration);
         }
         else
         {
@@ -50,7 +48,6 @@ public class TowerAttack : MonoBehaviour
             _currentAttackInterval = 1f;
             _currentAttackRadius = 2f;
             _currentSlowFactor = 2f;
-            _currentSlowDuration = 5f;
         }
     }
 
@@ -80,7 +77,6 @@ public class TowerAttack : MonoBehaviour
                 _currentAttackInterval = Mathf.Max(0.1f, upgrade.attackInterval);
                 _currentAttackRadius = Mathf.Max(0.1f, upgrade.attackRadius);
                 _currentSlowFactor = Mathf.Max(0.1f, upgrade.slowFactor);
-                _currentSlowDuration = Mathf.Max(0.1f, upgrade.slowDuration);
             }
         }
     }
@@ -145,7 +141,7 @@ public class TowerAttack : MonoBehaviour
     {
         int count = Physics.OverlapSphereNonAlloc(transform.position, _currentAttackRadius, _hits, _enemyLayerMask);
         for (int i = 0; i < count; i++)
-            _hits[i].GetComponent<EnemyMover>()?.ApplySlowness(_currentSlowFactor, _currentSlowDuration);
+            _hits[i].GetComponent<EnemyMover>()?.ApplySlowness(_currentSlowFactor, _currentAttackInterval);
     }
 
     private EnemyHealth GetTarget()

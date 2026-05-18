@@ -50,6 +50,7 @@ public class EconomyManager : MonoBehaviour
 
     public void DealDamage(int damage)
     {
+        if (IsGameOver) return;
         HP -= damage;
         GameObject.Find("EndBlock")
             .GetComponent("TriggerAnimation")

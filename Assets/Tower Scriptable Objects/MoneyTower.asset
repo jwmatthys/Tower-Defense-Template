@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1efe38b1a632f2209b5f14dce366e740, type: 3}
   m_Name: MoneyTower
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
+  towerType: 2
   towerName: Money Tower
   description: Generates money.
   icon: {fileID: 0}
@@ -22,27 +23,31 @@ MonoBehaviour:
   attackInterval: 1
   attackRadius: 2
   slowFactor: 2
-  slowDuration: 5
+  generatedMoney: 50
+  moneyInterval: 10
   upgrades:
   - cost: 150
     damage: 1
     attackInterval: 0.9
     attackRadius: 2
     slowFactor: 2
-    slowDuration: 5
     sellValue: 60
+    generatedMoney: 75
+    moneyInterval: 8
   - cost: 200
     damage: 1
     attackInterval: 0.8
     attackRadius: 2
     slowFactor: 2
-    slowDuration: 5
     sellValue: 80
+    generatedMoney: 100
+    moneyInterval: 5
   - cost: 250
     damage: 1
     attackInterval: 0.6
     attackRadius: 2
     slowFactor: 2
-    slowDuration: 5
     sellValue: 100
+    generatedMoney: 125
+    moneyInterval: 3
   yOffset: 0.875

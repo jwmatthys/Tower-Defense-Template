@@ -128,12 +128,10 @@ public class TowerPlacer : GridSelector
 
         if (tile.CompareTag(TAG_AVAILABLE) && _pendingTower != null)
         {
-            if (PlaceTower(tile, _pendingTower))
-            {
-                _pendingTower = null;
-                ClearSelection(); // deselect the tile so it doesn't stay highlighted
-                shopUI?.ShowIdle();
-            }
+            PlaceTower(tile, _pendingTower);
+            _pendingTower = null;
+            ClearSelection();
+            shopUI?.ShowIdle();
         }
         else if (tile.CompareTag(TAG_OCCUPIED))
         {
@@ -160,11 +158,9 @@ public class TowerPlacer : GridSelector
         // If an available tile is already selected, place immediately.
         if (SelectedTile != null && SelectedTile.CompareTag(TAG_AVAILABLE))
         {
-            if (PlaceTower(SelectedTile, data))
-            {
-                ClearSelection();
-                shopUI?.ShowIdle();
-            }
+            PlaceTower(SelectedTile, data);
+            ClearSelection();
+            shopUI?.ShowIdle();
             return;
         }
 
@@ -252,9 +248,11 @@ public class TowerPlacer : GridSelector
         // Apply stat upgrades to the tower components
         TowerAttack attack = _selectedPlacedTower.GetComponent<TowerAttack>();
         if (attack != null)
-        {
             attack.ApplyUpgrades();
-        }
+
+        TowerGenerateMoney moneyTower = _selectedPlacedTower.GetComponent<TowerGenerateMoney>();
+        if (moneyTower != null)
+            moneyTower.ApplyUpgrades();
 
         // Update the radius indicator if it exists
         RadiusIndicator indicator = _selectedPlacedTower.GetComponent<RadiusIndicator>();

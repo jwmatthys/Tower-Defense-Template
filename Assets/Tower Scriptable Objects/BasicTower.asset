@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1efe38b1a632f2209b5f14dce366e740, type: 3}
-  m_Name: DefaultTower
+  m_Name: BasicTower
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
+  towerType: 0
   towerName: Basic Tower
   description: Targets a single enemy.
   icon: {fileID: 0}
@@ -22,27 +23,31 @@ MonoBehaviour:
   attackInterval: 1
   attackRadius: 2
   slowFactor: 2
-  slowDuration: 5
+  generatedMoney: 0
+  moneyInterval: 30
   upgrades:
   - cost: 100
     damage: 1.5
     attackInterval: 0.9
     attackRadius: 2.5
     slowFactor: 2
-    slowDuration: 5
     sellValue: 35
+    generatedMoney: 0
+    moneyInterval: 0
   - cost: 150
     damage: 2
     attackInterval: 0.8
     attackRadius: 3
     slowFactor: 2
-    slowDuration: 5
     sellValue: 50
+    generatedMoney: 0
+    moneyInterval: 0
   - cost: 200
     damage: 3
     attackInterval: 0.6
     attackRadius: 4
     slowFactor: 2
-    slowDuration: 5
     sellValue: 75
+    generatedMoney: 0
+    moneyInterval: 0
   yOffset: 0.875

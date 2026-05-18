@@ -28,9 +28,11 @@ public class PlacedTower : MonoBehaviour
         // Apply upgrades to ensure tower stats are correct
         TowerAttack attack = GetComponent<TowerAttack>();
         if (attack != null)
-        {
             attack.ApplyUpgrades();
-        }
+
+        TowerGenerateMoney moneyTower = GetComponent<TowerGenerateMoney>();
+        if (moneyTower != null)
+            moneyTower.ApplyUpgrades();
     }
 
     /// <summary>Increases the tower's level by 1.</summary>

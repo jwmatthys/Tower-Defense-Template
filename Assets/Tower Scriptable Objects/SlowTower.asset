@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1efe38b1a632f2209b5f14dce366e740, type: 3}
   m_Name: SlowTower
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
+  towerType: 1
   towerName: Slowing Tower
   description: Slows all enemies in range.
   icon: {fileID: 0}
@@ -22,27 +23,31 @@ MonoBehaviour:
   attackInterval: 1
   attackRadius: 2
   slowFactor: 2
-  slowDuration: 5
+  generatedMoney: 0
+  moneyInterval: 30
   upgrades:
   - cost: 300
     damage: 1
     attackInterval: 0.95
     attackRadius: 2.3
     slowFactor: 2.5
-    slowDuration: 6
     sellValue: 70
+    generatedMoney: 0
+    moneyInterval: 0
   - cost: 400
     damage: 1
     attackInterval: 0.9
     attackRadius: 2.6
     slowFactor: 3
-    slowDuration: 7
     sellValue: 90
+    generatedMoney: 0
+    moneyInterval: 0
   - cost: 500
     damage: 1
     attackInterval: 0.8
     attackRadius: 3.1
     slowFactor: 4
-    slowDuration: 9
     sellValue: 120
+    generatedMoney: 0
+    moneyInterval: 0
   yOffset: 0.875

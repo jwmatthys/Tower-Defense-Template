@@ -4305,6 +4305,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1742966862419972093, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
+      propertyPath: m_text
+      value: YOU WIN
+      objectReference: {fileID: 0}
     - target: {fileID: 1938965542295708484, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4385,9 +4389,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2157895546093895868, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3658002038239030584, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
       propertyPath: m_Name
-      value: Canvas
+      value: HUD
       objectReference: {fileID: 0}
     - target: {fileID: 3793025558712441134, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
       propertyPath: m_text
@@ -4442,8 +4450,7 @@ PrefabInstance:
     - {fileID: 5315536133655316734, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
     - {fileID: 7960642256369142301, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
     m_RemovedGameObjects:
-    - {fileID: 2606933793921731633, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
-    - {fileID: 2157895546093895868, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
+    - {fileID: 0}
     - {fileID: 6366079505415886927, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []

@@ -4294,6 +4294,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1742966862419972093, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
+      propertyPath: m_text
+      value: TOWERS TOWERS TOWERS
+      objectReference: {fileID: 0}
     - target: {fileID: 1938965542295708484, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4374,6 +4378,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2157895546093895868, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2606933793921731633, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -4384,7 +4392,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3658002038239030584, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
       propertyPath: m_Name
-      value: Canvas
+      value: HUD
       objectReference: {fileID: 0}
     - target: {fileID: 5315536133655316734, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
       propertyPath: levelText
@@ -4403,8 +4411,7 @@ PrefabInstance:
     - {fileID: 6185017680430596197, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
     - {fileID: 7960642256369142301, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
     m_RemovedGameObjects:
-    - {fileID: 2157895546093895868, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
-    - {fileID: 4566305673961856016, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
+    - {fileID: 0}
     - {fileID: 6366079505415886927, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
     - {fileID: 4705578682567400436, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}
     - {fileID: 4068422892701772845, guid: c8cb875fe8a9449d8b7ccf5745c3ae1a, type: 3}

@@ -8,8 +8,11 @@ public class GUIDisplay : MonoBehaviour
     [SerializeField] private TextMeshProUGUI moneyText;
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private float levelDisplayTime = 4f;
-    
+    [SerializeField] private AudioClip gameOverSound;
+    [SerializeField] private AudioClip nextLevelSound;
+
     private EconomyManager _economyManager;
+    private AudioSource _audioSource;
 
     private EconomyManager GetEconomyManager()
     {
@@ -22,6 +25,11 @@ public class GUIDisplay : MonoBehaviour
     private void Start()
     {
         _economyManager = EconomyManager.Instance ?? FindAnyObjectByType<EconomyManager>();
+
+        _audioSource = gameObject.AddComponent<AudioSource>();
+        _audioSource.spatialBlend = 0f;
+        _audioSource.playOnAwake = false;
+
         StartCoroutine(LevelDisplayCoroutine());
     }
 
@@ -42,6 +50,7 @@ public class GUIDisplay : MonoBehaviour
         economy.level += 1;
         levelText.text = $"LEVEL {economy.level}";
         levelText.gameObject.SetActive(true);
+        if (nextLevelSound != null) _audioSource.PlayOneShot(nextLevelSound);
         yield return new WaitForSeconds(levelDisplayTime);
         levelText.gameObject.SetActive(false);
     }
@@ -58,5 +67,6 @@ public class GUIDisplay : MonoBehaviour
         StopAllCoroutines();
         levelText.text = "GAME OVER";
         levelText.gameObject.SetActive(true);
+        if (gameOverSound != null) _audioSource.PlayOneShot(gameOverSound);
     }
 }
