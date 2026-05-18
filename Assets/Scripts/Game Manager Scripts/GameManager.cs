@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     [Tooltip("How many seconds to wait after ending the level" +
              "before loading the next scene.")]
-    [SerializeField] private float endLevelDelay = 3f;
+    [SerializeField] private float endLevelDelay = 5f;
 
     [Tooltip("The EconomyManager keeps track of HP, money, and current level.")]
     [SerializeField] private EconomyManager economyManager;
@@ -15,12 +15,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GUIDisplay guiDisplay;
     [SerializeField] private PlayableDirector director;
 
+    [Tooltip("Sound played when the level is cleared.")]
+    [SerializeField] private AudioClip levelClearSound;
+
+    private AudioSource _audioSource;
     private readonly float _pollInterval = 1f;
     private int _enemyLayer;
     
     void Awake()
     {
         _enemyLayer = LayerMask.NameToLayer("Enemy");
+        _audioSource = gameObject.AddComponent<AudioSource>();
+        _audioSource.spatialBlend = 0f;
+        _audioSource.playOnAwake = false;
     }
 
     void OnEnable()
@@ -50,7 +57,15 @@ public class GameManager : MonoBehaviour
     private void EndLevel()
     {
         if (EconomyManager.Instance != null && EconomyManager.Instance.IsGameOver) return;
+
+        if (guiDisplay == null)
+            guiDisplay = FindAnyObjectByType<GUIDisplay>();
+
         guiDisplay?.ShowLevelClear();
+
+        if (levelClearSound != null)
+            _audioSource.PlayOneShot(levelClearSound);
+
         StartCoroutine(LoadNextLevel());
     }
 

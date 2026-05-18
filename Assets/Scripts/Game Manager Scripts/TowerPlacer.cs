@@ -265,6 +265,8 @@ public class TowerPlacer : GridSelector
 
         Debug.Log($"[TowerPlacer] Upgraded {_selectedPlacedTower.Data.towerName} to level {_selectedPlacedTower.Level} for {cost} gold.");
 
+        shopUI?.PlayUpgradeSound();
+
         // Refresh the UI to show updated stats
         shopUI?.ShowOccupied(_selectedPlacedTower);
     }

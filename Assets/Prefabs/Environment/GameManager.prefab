@@ -47,8 +47,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
   endLevelDelay: 3
   economyManager: {fileID: 0}
-  sceneClearedMessage: {fileID: 0}
+  guiDisplay: {fileID: 0}
   director: {fileID: 0}
+  levelClearSound: {fileID: 8300000, guid: 18ac169edea332bd19130c27062e0731, type: 3}
 --- !u!114 &4711131459076724107
 MonoBehaviour:
   m_ObjectHideFlags: 0

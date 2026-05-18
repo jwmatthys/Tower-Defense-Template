@@ -64,6 +64,13 @@ public class TowerShopUI : MonoBehaviour
     [Tooltip("How long to show temporary status messages such as insufficient funds.")]
     [SerializeField] private float statusMessageDuration = 5f;
 
+    [Tooltip("Sound played when a placement or upgrade is attempted with insufficient funds.")]
+    [SerializeField] private AudioClip insufficientFundsSound;
+
+    [Tooltip("Sound played when a tower is successfully upgraded.")]
+    [SerializeField] private AudioClip upgradeSound;
+
+    private AudioSource _audioSource;
     private Coroutine _autoDeselectCoroutine;
     private Coroutine _statusMessageCoroutine;
     private string _statusTextBackup;
@@ -74,6 +81,10 @@ public class TowerShopUI : MonoBehaviour
 
     void Start()
     {
+        _audioSource = gameObject.AddComponent<AudioSource>();
+        _audioSource.spatialBlend = 0f;
+        _audioSource.playOnAwake = false;
+
         towerPlacer = FindAnyObjectByType<GameManager>().GetComponent<TowerPlacer>();
         BuildTowerButtons();
         SetupStaticListeners();
@@ -311,6 +322,15 @@ public class TowerShopUI : MonoBehaviour
         _statusTextBackup = statusText.text;
         statusText.text = message;
         _statusMessageCoroutine = StartCoroutine(StatusMessageRoutine());
+
+        if (insufficientFundsSound != null)
+            _audioSource.PlayOneShot(insufficientFundsSound);
+    }
+
+    public void PlayUpgradeSound()
+    {
+        if (upgradeSound != null)
+            _audioSource.PlayOneShot(upgradeSound);
     }
 
     private IEnumerator StatusMessageRoutine()

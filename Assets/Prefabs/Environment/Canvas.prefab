@@ -1063,6 +1063,8 @@ MonoBehaviour:
   towerButtonPrefab: {fileID: 4555026220932885474, guid: 9d033ed2c8abade35ae788cd820eeab0, type: 3}
   selectionDisplayDuration: 3
   statusMessageDuration: 5
+  insufficientFundsSound: {fileID: 8300000, guid: 57b54717f28a8dda38908b44cddc570c, type: 3}
+  upgradeSound: {fileID: 8300000, guid: ee8f3d480ed2b4326a7a13b5796b99b7, type: 3}
 --- !u!114 &5315536133655316734
 MonoBehaviour:
   m_ObjectHideFlags: 0
