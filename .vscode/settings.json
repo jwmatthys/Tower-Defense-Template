@@ -67,6 +67,6 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "Tower Defense Template.slnx",
+    "dotnet.defaultSolution": "Tower-Defense-Template.slnx",
     "dotnet.enableWorkspaceBasedDevelopment": false
 }
