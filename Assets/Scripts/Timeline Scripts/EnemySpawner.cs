@@ -8,7 +8,7 @@ public class EnemySpawner : MonoBehaviour
         StartCoroutine(SpawnLoop(enemyPrefab, interval));
     }
 
-    IEnumerator SpawnLoop(GameObject enemyPrefab, float interval)
+    protected virtual IEnumerator SpawnLoop(GameObject enemyPrefab, float interval)
     {
         while (true)
         {

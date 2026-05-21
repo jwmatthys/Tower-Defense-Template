@@ -3,9 +3,8 @@ using UnityEngine;
 
 public class EnemyFreezer : MonoBehaviour
 {
-    public float freezeInterval = 15f;
-    public float freezeRadius = 3f;
-    public float freezeDuration = 5f;
+    public float freezeInterval = 3f;
+    public float freezeRadius = 1f;
 
     private Coroutine _freezingCoroutine;
     private readonly Collider[] _hits = new Collider[50];
@@ -42,6 +41,6 @@ public class EnemyFreezer : MonoBehaviour
     {
         int count = Physics.OverlapSphereNonAlloc(transform.position, freezeRadius, _hits, _towerLayerMask);
         for (int i = 0; i < count; i++)
-            _hits[i].GetComponent<TowerFrozen>()?.Freeze(freezeDuration);
+            _hits[i].GetComponent<TowerFrozen>()?.Freeze(freezeInterval);
     }
 }

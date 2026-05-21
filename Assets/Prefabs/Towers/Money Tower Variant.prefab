@@ -28,6 +28,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: ab347adbb611259879a9d5621fa3003b, type: 2}
+    - target: {fileID: 2881418747921405852, guid: a4787c2032c094840ac3071fb9a494ec, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6008422108269342660, guid: a4787c2032c094840ac3071fb9a494ec, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.5
@@ -77,6 +81,7 @@ PrefabInstance:
     - {fileID: 8896666660591311006, guid: a4787c2032c094840ac3071fb9a494ec, type: 3}
     - {fileID: 4131318485169075335, guid: a4787c2032c094840ac3071fb9a494ec, type: 3}
     - {fileID: 5409333875282112141, guid: a4787c2032c094840ac3071fb9a494ec, type: 3}
+    - {fileID: 2881418747921405852, guid: a4787c2032c094840ac3071fb9a494ec, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -101,5 +106,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebf2b29b10ba945c4b4d973f7ddba06f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerGenerateMoney
-  generatedMoney: 10
-  moneyInterval: 30

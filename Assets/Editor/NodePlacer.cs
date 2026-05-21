@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class NodePlacer : EditorWindow
 {
-    private GameObject nodePrefab;
+    private Transform pathParent;
     private Transform nodeParent;
 
     [MenuItem("Tools/Node Placer")]
@@ -13,13 +13,24 @@ public class NodePlacer : EditorWindow
         GetWindow<NodePlacer>("Node Placer");
     }
 
+    private static GameObject FindNodePrefab()
+    {
+        foreach (string guid in AssetDatabase.FindAssets("Node t:Prefab"))
+        {
+            string path = AssetDatabase.GUIDToAssetPath(guid);
+            if (System.IO.Path.GetFileNameWithoutExtension(path) == "Node")
+                return AssetDatabase.LoadAssetAtPath<GameObject>(path);
+        }
+        return null;
+    }
+
     private void OnGUI()
     {
         GUILayout.Label("Node Placer", EditorStyles.boldLabel);
         GUILayout.Space(5);
 
-        nodePrefab = (GameObject)EditorGUILayout.ObjectField(
-            "Node Prefab", nodePrefab, typeof(GameObject), false);
+        pathParent = (Transform)EditorGUILayout.ObjectField(
+            "Path Parent", pathParent, typeof(Transform), true);
 
         nodeParent = (Transform)EditorGUILayout.ObjectField(
             "Node Parent (Optional)", nodeParent, typeof(Transform), true);
@@ -27,12 +38,13 @@ public class NodePlacer : EditorWindow
         GUILayout.Space(10);
 
         EditorGUILayout.HelpBox(
-            "Select path cube GameObjects in the scene, then click Place Nodes.",
+            "Drag in the Path parent object, then click Place Nodes.",
             MessageType.Info);
 
         GUILayout.Space(5);
 
-        GUI.enabled = nodePrefab != null && Selection.gameObjects.Length > 0;
+        int childCount = pathParent != null ? pathParent.childCount : 0;
+        GUI.enabled = childCount > 0;
 
         if (GUILayout.Button("Place Nodes", GUILayout.Height(30)))
         {
@@ -42,28 +54,34 @@ public class NodePlacer : EditorWindow
         GUI.enabled = true;
 
         GUILayout.Space(5);
-        GUILayout.Label($"Selected objects: {Selection.gameObjects.Length}", EditorStyles.miniLabel);
+        GUILayout.Label($"Path children: {childCount}", EditorStyles.miniLabel);
     }
 
     private void PlaceNodes()
     {
-        GameObject[] selected = Selection.gameObjects;
-
-        if (selected.Length == 0)
+        if (pathParent == null || pathParent.childCount == 0)
         {
-            EditorUtility.DisplayDialog("Node Placer", "No GameObjects selected.", "OK");
+            EditorUtility.DisplayDialog("Node Placer", "Path parent has no children.", "OK");
+            return;
+        }
+
+        GameObject nodePrefab = FindNodePrefab();
+        if (nodePrefab == null)
+        {
+            EditorUtility.DisplayDialog("Node Placer",
+                "Could not find a prefab named \"Node\" in the project.", "OK");
             return;
         }
 
         // Collect path positions and determine Y and bounding box
         HashSet<Vector2Int> pathPositions = new HashSet<Vector2Int>();
-        float yPosition = selected[0].transform.position.y;
+        float yPosition = pathParent.GetChild(0).position.y;
         int minX = int.MaxValue, maxX = int.MinValue;
         int minZ = int.MaxValue, maxZ = int.MinValue;
 
-        foreach (GameObject go in selected)
+        foreach (Transform child in pathParent)
         {
-            Vector3 pos = go.transform.position;
+            Vector3 pos = child.position;
             int x = Mathf.RoundToInt(pos.x);
             int z = Mathf.RoundToInt(pos.z);
 

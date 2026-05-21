@@ -1,10 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
-public class OneShotEnemySpawner : MonoBehaviour
+public class OneShotEnemySpawner : EnemySpawner
 {
-    public void StartSpawning(GameObject enemyPrefab, float interval)
+    protected override IEnumerator SpawnLoop(GameObject enemyPrefab, float interval)
     {
         Instantiate(enemyPrefab, transform.position, transform.rotation);
+        yield break;
     }
 }

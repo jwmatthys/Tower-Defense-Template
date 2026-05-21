@@ -91,17 +91,14 @@ public class TowerDataEditor : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("towerType"), new GUIContent("Tower Type"));
 
         EditorGUILayout.Space();
-        SectionLabel("Identity");
         EditorGUILayout.PropertyField(serializedObject.FindProperty("towerName"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("description"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("icon"));
 
         EditorGUILayout.Space();
-        SectionLabel("Prefab");
         EditorGUILayout.PropertyField(serializedObject.FindProperty("prefab"));
 
         EditorGUILayout.Space();
-        SectionLabel("Economy");
         EditorGUILayout.PropertyField(serializedObject.FindProperty("buyCost"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("sellValue"));
 
@@ -110,7 +107,6 @@ public class TowerDataEditor : Editor
         switch (data.towerType)
         {
             case TowerType.Damage:
-                SectionLabel("Base Stats");
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("damage"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("attackInterval"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("attackRadius"));
@@ -122,7 +118,6 @@ public class TowerDataEditor : Editor
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("slowFactor"));
                 break;
             case TowerType.Money:
-                SectionLabel("Money Generation");
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("generatedMoney"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("moneyInterval"));
                 break;
@@ -132,7 +127,6 @@ public class TowerDataEditor : Editor
         _upgradeList.DoLayoutList();
 
         EditorGUILayout.Space();
-        SectionLabel("Placement");
         EditorGUILayout.PropertyField(serializedObject.FindProperty("yOffset"));
 
         serializedObject.ApplyModifiedProperties();
