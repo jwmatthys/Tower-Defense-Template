@@ -1,11 +1,12 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;
 
 public class EconomyManager : MonoBehaviour
 {
     public static EconomyManager Instance { get; private set; }
-    public bool IsGameOver { get; private set; }
+
+    public event System.Action OnGameOver;
+    private bool _gameOver;
 
     [SerializeField] private int startingHP = 100;
     [SerializeField] private int startingMoney = 100;
@@ -13,9 +14,6 @@ public class EconomyManager : MonoBehaviour
     public int HP { get; private set; } = 100;
     public int Money { get; private set; } = 100;
     [HideInInspector] public int level;
-    
-    [Tooltip("How long the Game Over message should appear before game resets.")]
-    [SerializeField] private float gameOverDelay = 5f;
 
     [SerializeField] private bool overrideStartingValues;
     [SerializeField] private int customStartingMoney = 1000;
@@ -56,7 +54,7 @@ public class EconomyManager : MonoBehaviour
 
     public void DealDamage(int damage)
     {
-        if (IsGameOver) return;
+        if (_gameOver) return;
         HP -= damage;
         GameObject.Find("EndBlock")
             .GetComponent("TriggerAnimation")
@@ -64,26 +62,15 @@ public class EconomyManager : MonoBehaviour
         if (HP <= 0)
         {
             HP = 0;
-            StartCoroutine(GameOver());
+            _gameOver = true;
+            OnGameOver?.Invoke();
         }
     }
 
-    private IEnumerator GameOver()
+    public void Shutdown()
     {
-        IsGameOver = true;
-        Debug.Log("Game Over");
-        FindAnyObjectByType<GUIDisplay>()?.ShowGameOver();
-
-        foreach (TowerAttack attack in FindObjectsByType<TowerAttack>())
-        {
-            attack.StopShooting();
-            attack.enabled = false;
-        }
-        
-        yield return new WaitForSeconds(gameOverDelay);
         Instance = null;
         Destroy(gameObject);
-        SceneManager.LoadScene(0);
     }
     
     public void NextLevel()

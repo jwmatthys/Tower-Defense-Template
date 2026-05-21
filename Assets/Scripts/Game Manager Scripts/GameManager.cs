@@ -9,6 +9,11 @@ public class GameManager : MonoBehaviour
              "before loading the next scene.")]
     [SerializeField] private float endLevelDelay = 5f;
 
+    [Tooltip("How long the Game Over message should appear before game resets.")]
+    [SerializeField] private float gameOverDelay = 5f;
+
+    public bool IsGameOver { get; private set; }
+
     [Tooltip("The EconomyManager keeps track of HP, money, and current level.")]
     [SerializeField] private EconomyManager economyManager;
 
@@ -30,6 +35,12 @@ public class GameManager : MonoBehaviour
         _audioSource.playOnAwake = false;
     }
 
+    void Start()
+    {
+        if (EconomyManager.Instance != null)
+            EconomyManager.Instance.OnGameOver += HandleGameOver;
+    }
+
     void OnEnable()
     {
         director.stopped += OnTimelineFinished;
@@ -38,6 +49,12 @@ public class GameManager : MonoBehaviour
     void OnDisable()
     {
         director.stopped -= OnTimelineFinished;
+    }
+
+    void OnDestroy()
+    {
+        if (EconomyManager.Instance != null)
+            EconomyManager.Instance.OnGameOver -= HandleGameOver;
     }
 
     void OnTimelineFinished(PlayableDirector d)
@@ -56,7 +73,7 @@ public class GameManager : MonoBehaviour
     
     private void EndLevel()
     {
-        if (EconomyManager.Instance != null && EconomyManager.Instance.IsGameOver) return;
+        if (IsGameOver) return;
 
         if (guiDisplay == null)
             guiDisplay = FindAnyObjectByType<GUIDisplay>();
@@ -73,5 +90,29 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(endLevelDelay);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    private void HandleGameOver()
+    {
+        IsGameOver = true;
+        StartCoroutine(GameOverCoroutine());
+    }
+
+    private IEnumerator GameOverCoroutine()
+    {
+        Debug.Log("Game Over");
+        if (guiDisplay == null)
+            guiDisplay = FindAnyObjectByType<GUIDisplay>();
+        guiDisplay?.ShowGameOver();
+
+        foreach (TowerAttack attack in FindObjectsByType<TowerAttack>())
+        {
+            attack.StopShooting();
+            attack.enabled = false;
+        }
+
+        yield return new WaitForSeconds(gameOverDelay);
+        EconomyManager.Instance?.Shutdown();
+        SceneManager.LoadScene(0);
     }
 }
