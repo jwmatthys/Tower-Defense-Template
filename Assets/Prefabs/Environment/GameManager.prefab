@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
   endLevelDelay: 3
+  gameOverDelay: 5
   economyManager: {fileID: 0}
   guiDisplay: {fileID: 0}
   director: {fileID: 0}

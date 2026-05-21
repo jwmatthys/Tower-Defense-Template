@@ -88,6 +88,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator LoadNextLevel()
     {
+        EconomyManager.Instance?.LevelClearBonus();
         yield return new WaitForSeconds(endLevelDelay);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }

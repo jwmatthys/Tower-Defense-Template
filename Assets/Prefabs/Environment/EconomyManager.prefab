@@ -44,8 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 213f0006ae731476a95fcef4fa3ed8ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EconomyManager
+  startingHP: 100
+  startingMoney: 200
+  levelClearBonus: 100
   level: 0
-  gameOverDelay: 5
   overrideStartingValues: 0
   customStartingMoney: 1000
   customStartingHP: 1000

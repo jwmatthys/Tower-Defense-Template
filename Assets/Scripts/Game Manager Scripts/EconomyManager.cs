@@ -13,6 +13,9 @@ public class EconomyManager : MonoBehaviour
     
     public int HP { get; private set; } = 100;
     public int Money { get; private set; } = 100;
+    
+    public int levelClearBonus = 100;
+
     [HideInInspector] public int level;
 
     [SerializeField] private bool overrideStartingValues;
@@ -39,6 +42,11 @@ public class EconomyManager : MonoBehaviour
     public void SpendMoney(int amount)
     {
         Money -= amount;
+    }
+
+    public void LevelClearBonus()
+    {
+        GainMoney(levelClearBonus);
     }
 
     /// <summary>Attempts to spend gold. Returns true if successful, false if insufficient funds.</summary>
